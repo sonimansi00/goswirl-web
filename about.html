@@ -13,6 +13,35 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
+    <style>
+        @font-face {
+            font-family: 'Circular';
+            src: url('https://cdn.jsdelivr.net/gh/SwirlAdmin/swirl-cdn/assets/font-family/v13/CircularStd-Light.otf') format('opentype');
+            font-weight: 300;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Circular';
+            src: url('https://cdn.jsdelivr.net/gh/SwirlAdmin/swirl-cdn/assets/font-family/v13/CircularStd-Book.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Circular';
+            src: url('https://cdn.jsdelivr.net/gh/SwirlAdmin/swirl-cdn/assets/font-family/v13/CircularStd-Medium.otf') format('opentype');
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Circular';
+            src: url('https://cdn.jsdelivr.net/gh/SwirlAdmin/swirl-cdn/assets/font-family/v13/CircularStd-Bold.otf') format('opentype');
+            font-weight: 700;
+            font-style: normal;
+        }
+    </style>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
     <script>
         tailwind.config = {
@@ -30,7 +59,8 @@
                         accent: "#000281",
                     },
                     fontFamily: {
-                        display: ["Inter", "sans-serif"],
+                        sans: ["Circular", "Plus Jakarta Sans", "sans-serif"],
+                        display: ["Circular", "Plus Jakarta Sans", "sans-serif"],
                         mono: ["JetBrains Mono", "monospace"],
                         serif: ["Playfair Display", "serif"],
                     },
@@ -81,7 +111,7 @@
             <div class="flex items-center gap-8">
                 <a class="flex items-center gap-2 group" href="index.html">
 
-                    <span class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">SWIRL</span>
+                    <img src="./assets/Swirl.svg" alt="SWIRL" class="h-8 w-auto dark:invert" />
                 </a>
                 <div class="hidden md:flex items-center gap-1">
                     <a class="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white transition-colors"
@@ -259,6 +289,177 @@
             </div>
         </section>
 
+        <!-- Advisors Section -->
+        <section class="max-w-7xl mx-auto px-6 py-24 bg-slate-50 dark:bg-slate-900/50">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Our Advisors</h2>
+                <p class="text-slate-600 dark:text-slate-400 max-w-xl mx-auto">Industry veterans guiding our vision.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Advisor 1: Bryan Amaral -->
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-md transition">
+                    <div class="flex items-start gap-4 mb-4">
+                        <img src="https://cdn.prod.website-files.com/63f0e6822ce56e6262917200/69084df3df93c9f2237f0b0b_2032.avif"
+                            alt="Bryan Amaral" class="w-16 h-16 rounded-full object-cover flex-shrink-0" />
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">Bryan Amaral</h3>
+                            <p class="text-sm text-primary font-medium">Founder, President & CEO, Clennicity</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Bryan is a retail technology strategist focused on driving customer engagement and growth, with
+                        leadership experience at Clennicity, Realgent Solutions, and Symbol Technologies.
+                    </p>
+                </div>
+
+                <!-- Advisor 2: Vatsal Mehta -->
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-md transition">
+                    <div class="flex items-start gap-4 mb-4">
+                        <img src="https://cdn.prod.website-files.com/63f0e6822ce56e6262917200/69084fa2e456fe163199df5a_2034.avif"
+                            alt="Vatsal Mehta" class="w-16 h-16 rounded-full object-cover flex-shrink-0" />
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">Vatsal Mehta</h3>
+                            <p class="text-sm text-primary font-medium">Founding Partner, Sankat Mochan Capital</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Vatsal is a technology and business leader with over two decades of experience driving
+                        innovation in AI, advertising, and commerce, with leadership roles at Meta and as Founding
+                        Partner at Sankat Mochan Capital.
+                    </p>
+                </div>
+
+                <!-- Advisor 3: Shruti Kapoor -->
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-md transition">
+                    <div class="flex items-start gap-4 mb-4">
+                        <img src="https://cdn.prod.website-files.com/63f0e6822ce56e6262917200/69084e9665beaf250d15027f_2035.avif"
+                            alt="Shruti Kapoor" class="w-16 h-16 rounded-full object-cover flex-shrink-0" />
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">Shruti Kapoor</h3>
+                            <p class="text-sm text-primary font-medium">Founder & CEO, Wingman</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Shruti is a technology leader and speaker, focused on helping companies improve sales processes
+                        through better conversations and her experience with organizations such as Modern Sales Pros and
+                        Y Combinator.
+                    </p>
+                </div>
+
+                <!-- Advisor 4: Scott Sorochak -->
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-md transition">
+                    <div class="flex items-start gap-4 mb-4">
+                        <img src="https://cdn.prod.website-files.com/63f0e6822ce56e6262917200/690850b789a8060662e1eed9_2036.avif"
+                            alt="Scott Sorochak" class="w-16 h-16 rounded-full object-cover flex-shrink-0" />
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">Scott Sorochak</h3>
+                            <p class="text-sm text-primary font-medium">Venture Partner, SparkLabs</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Scott is the former CRO at Brandwatch and Venture Partner at SparkLabs Group, with leadership
+                        roles at LivePro & Cloudera. With 25+ years scaling SaaS companies to $100M+, he excels in
+                        building teams, driving revenue, and accelerating growth.
+                    </p>
+                </div>
+
+                <!-- Advisor 5: John Andrews -->
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-md transition">
+                    <div class="flex items-start gap-4 mb-4">
+                        <img src="https://cdn.prod.website-files.com/63f0e6822ce56e6262917200/69085009a51b00139411bcc4_2033.avif"
+                            alt="John Andrews" class="w-16 h-16 rounded-full object-cover flex-shrink-0" />
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">John Andrews</h3>
+                            <p class="text-sm text-primary font-medium">Co-founder, Kaladhin Consulting</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                        John is the former Retail Co-Innovation Director at Ricoh USA with leadership experience at
+                        Walmart, Proclivity, and Collective Bias. A pioneer in blending digital and physical retail, he
+                        brings expertise in AI-driven, data-powered commerce strategies.
+                    </p>
+                </div>
+
+                <!-- Advisor 6: Aakrit Vaish -->
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-md transition">
+                    <div class="flex items-start gap-4 mb-4">
+                        <img src="https://cdn.prod.website-files.com/63f0e6822ce56e6262917200/690851e5a5c9b551818c0b66_2037.avif"
+                            alt="Aakrit Vaish" class="w-16 h-16 rounded-full object-cover flex-shrink-0" />
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">Aakrit Vaish</h3>
+                            <p class="text-sm text-primary font-medium">Co-founder, Haptik</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Aakrit is the co-founder & ex-CEO of Haptik, a conversational AI platform acquired by Reliance
+                        Jio for $100 million. Founder & CEO of Interakt, the leading WhatsApp CRM for SMBs in India &
+                        emerging markets. Incorporated as part of Jio Haptik in 2020.
+                    </p>
+                </div>
+
+                <!-- Advisor 7: Apoorv Sharma -->
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-md transition">
+                    <div class="flex items-start gap-4 mb-4">
+                        <img src="https://cdn.prod.website-files.com/63f0e6822ce56e6262917200/69085236d1dd547278339a19_2038.avif"
+                            alt="Apoorv Sharma" class="w-16 h-16 rounded-full object-cover flex-shrink-0" />
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">Apoorv Sharma</h3>
+                            <p class="text-sm text-primary font-medium">Builder, CureTech AI</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Apoorv focuses on developing language agents for enterprise IT while advising and investing in
+                        emerging startups. He brings over 14 years of experience as a machine learning engineer,
+                        building advanced AI solutions across global tech leaders such as Meta, Uber, X, Walmart Global
+                        Tech, and Flipkart.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Investors Section -->
+        <section class="max-w-7xl mx-auto px-6 py-24">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Our Investors</h2>
+                <p class="text-slate-600 dark:text-slate-400 max-w-xl mx-auto">Backed by leading venture capital firms.
+                </p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
+                <!-- Investor 1 -->
+                <div
+                    class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-md transition flex items-center justify-center h-28">
+                    <img src="./assets/logo1.webp" alt="Investor 1" class="max-h-full max-w-full object-contain" />
+                </div>
+
+                <!-- Investor 2 -->
+                <div
+                    class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-md transition flex items-center justify-center h-28">
+                    <img src="./assets/logo2.png" alt="Investor 2" class="max-h-full max-w-full object-contain" />
+                </div>
+
+                <!-- Investor 3 -->
+                <div
+                    class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-md transition flex items-center justify-center h-28">
+                    <img src="./assets/logo3.png" alt="Investor 3" class="max-h-full max-w-full object-contain" />
+                </div>
+
+                <!-- Investor 4 -->
+                <div
+                    class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-md transition flex items-center justify-center h-28">
+                    <img src="./assets/logo4.png" alt="Investor 4" class="max-h-full max-w-full object-contain" />
+                </div>
+
+                <!-- Investor 5 -->
+                <div
+                    class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-md transition flex items-center justify-center h-28">
+                    <img src="./assets/logo5.png" alt="Investor 5" class="max-h-full max-w-full object-contain" />
+                </div>
+
+                <!-- Investor 6 -->
+
+            </div>
+        </section>
+
         <!-- CTA Section -->
         <section class="max-w-7xl mx-auto px-6 pb-24">
             <div class="bg-primary rounded-3xl p-12 md:p-20 text-center relative overflow-hidden">
@@ -282,14 +483,7 @@
         <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
             <div class="space-y-6">
                 <div class="flex items-center gap-3 text-primary dark:text-white">
-                    <div class="size-6">
-                        <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                            <path clip-rule="evenodd"
-                                d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z"
-                                fill="currentColor" fill-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    <span class="font-bold text-lg tracking-tight uppercase font-display">SWIRL AI</span>
+                    <img src="./assets/Swirl.svg" alt="SWIRL" class="h-6 w-auto dark:invert" />
                 </div>
                 <p class="text-sm text-slate-500 max-w-xs leading-relaxed font-medium">
                     The intelligence layer for global luxury commerce. Empowering heritage houses with future-proof AI.
@@ -322,7 +516,7 @@
             </div>
         </div>
         <div class="max-w-[1200px] mx-auto mt-16 pt-8 border-t border-slate-200 dark:border-slate-800 text-center">
-            <p class="text-xs text-slate-400 font-medium tracking-wide">© 2024 Swirl AI Platforms. All rights reserved.
+            <p class="text-xs text-slate-400 font-medium tracking-wide">© 2026 Swirl AI Platforms. All rights reserved.
             </p>
         </div>
     </footer>

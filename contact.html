@@ -13,6 +13,35 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
+    <style>
+        @font-face {
+            font-family: 'Circular';
+            src: url('https://cdn.jsdelivr.net/gh/SwirlAdmin/swirl-cdn/assets/font-family/v13/CircularStd-Light.otf') format('opentype');
+            font-weight: 300;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Circular';
+            src: url('https://cdn.jsdelivr.net/gh/SwirlAdmin/swirl-cdn/assets/font-family/v13/CircularStd-Book.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Circular';
+            src: url('https://cdn.jsdelivr.net/gh/SwirlAdmin/swirl-cdn/assets/font-family/v13/CircularStd-Medium.otf') format('opentype');
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Circular';
+            src: url('https://cdn.jsdelivr.net/gh/SwirlAdmin/swirl-cdn/assets/font-family/v13/CircularStd-Bold.otf') format('opentype');
+            font-weight: 700;
+            font-style: normal;
+        }
+    </style>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
     <script>
         tailwind.config = {
@@ -30,7 +59,8 @@
                         accent: "#000281",
                     },
                     fontFamily: {
-                        display: ["Inter", "sans-serif"],
+                        sans: ["Circular", "Plus Jakarta Sans", "sans-serif"],
+                        display: ["Circular", "Plus Jakarta Sans", "sans-serif"],
                         mono: ["JetBrains Mono", "monospace"],
                         serif: ["Playfair Display", "serif"],
                     },
@@ -75,7 +105,7 @@
             <div class="flex items-center gap-8">
                 <a class="flex items-center gap-2 group" href="index.html">
 
-                    <span class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">SWIRL</span>
+                    <img src="./assets/Swirl.svg" alt="SWIRL" class="h-8 w-auto dark:invert" />
                 </a>
                 <div class="hidden md:flex items-center gap-1">
                     <a class="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white transition-colors"
@@ -254,14 +284,7 @@
         <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
             <div class="space-y-6">
                 <div class="flex items-center gap-3 text-primary dark:text-white">
-                    <div class="size-6">
-                        <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                            <path clip-rule="evenodd"
-                                d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z"
-                                fill="currentColor" fill-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    <span class="font-bold text-lg tracking-tight uppercase font-display">SWIRL AI</span>
+                    <img src="./assets/Swirl.svg" alt="SWIRL" class="h-6 w-auto dark:invert" />
                 </div>
                 <p class="text-sm text-slate-500 max-w-xs leading-relaxed font-medium">
                     The intelligence layer for global luxury commerce. Empowering heritage houses with future-proof AI.
@@ -294,7 +317,7 @@
             </div>
         </div>
         <div class="max-w-[1200px] mx-auto mt-16 pt-8 border-t border-slate-200 dark:border-slate-800 text-center">
-            <p class="text-xs text-slate-400 font-medium tracking-wide">© 2024 Swirl AI Platforms. All rights reserved.
+            <p class="text-xs text-slate-400 font-medium tracking-wide">© 2026 Swirl AI Platforms. All rights reserved.
             </p>
         </div>
     </footer>
