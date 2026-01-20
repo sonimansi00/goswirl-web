@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html class="light scroll-smooth" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Privacy Policy - SWIRL Orbital Motion Engine</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#000281",
+                        "background-light": "#ffffff",
+                        "background-dark": "#050505",
+                        "card-blue": "#eff6ff",
+                        "card-peach": "#fff7ed",
+                        "card-lavender": "#f5f3ff",
+                        "card-mint": "#f0fdf4",
+                        accent: "#000281",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                        mono: ["JetBrains Mono", "monospace"],
+                        serif: ["Playfair Display", "serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "12px",
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        .glass-panel-nav {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .sky-gradient {
+            background: radial-gradient(circle at 50% 0%, rgba(186, 230, 253, 0.4) 0%, rgba(255, 255, 255, 0) 70%),
+                linear-gradient(to bottom, #f0f9ff, #ffffff);
+        }
+    </style>
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+    </script>
+</head>
+
+<body
+    class="font-sans antialiased bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 selection:bg-primary selection:text-white">
+    <nav class="fixed top-0 left-0 right-0 z-50 flex justify-center p-4">
+        <div
+            class="max-w-7xl w-full flex items-center justify-between px-6 py-3 rounded-full glass-panel-nav shadow-sm">
+            <div class="flex items-center gap-8">
+                <a class="flex items-center gap-2 group" href="index.html">
+
+                    <span class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">SWIRL</span>
+                </a>
+                <div class="hidden md:flex items-center gap-1">
+                    <a class="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white transition-colors"
+                        href="index.html">Home</a>
+                    <a class="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white transition-colors"
+                        href="about.html">About Us</a>
+                    <a class="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white transition-colors"
+                        href="contact.html">Contact</a>
+                    <a class="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white transition-colors"
+                        href="pricing.html">Pricing</a>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+
+                <a class="hidden sm:block bg-primary text-white px-5 py-2.5 rounded-full text-sm font-bold shadow-lg shadow-blue-900/20 hover:scale-105 transition-transform"
+                    href="#">Get Started</a>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-600 dark:text-slate-300">
+                    <span class="material-icons-outlined">menu</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="hidden absolute top-20 left-4 right-4 bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-6 flex flex-col gap-4 z-40">
+            <a class="text-sm font-semibold text-slate-600 dark:text-slate-400 py-2 border-b border-slate-100 dark:border-slate-800"
+                href="index.html">Home</a>
+            <a class="text-sm font-semibold text-slate-600 dark:text-slate-400 py-2 border-b border-slate-100 dark:border-slate-800"
+                href="about.html">About Us</a>
+            <a class="text-sm font-semibold text-slate-600 dark:text-slate-400 py-2 border-b border-slate-100 dark:border-slate-800"
+                href="contact.html">Contact</a>
+            <a class="text-sm font-semibold text-slate-600 dark:text-slate-400 py-2 border-b border-slate-100 dark:border-slate-800"
+                href="pricing.html">Pricing</a>
+            <div class="pt-2">
+                <a class="bg-primary text-white px-5 py-2.5 rounded-full text-sm font-bold block text-center"
+                    href="#">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="relative pt-32 pb-20  min-h-screen">
+        <div class="absolute top-20 left-[10%] w-64 h-32 bg-white/40 dark:bg-white/5 blur-3xl rounded-full"></div>
+        <div class="absolute top-40 right-[15%] w-96 h-48 bg-white/50 dark:bg-white/5 blur-3xl rounded-full"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h1
+                    class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white tracking-tight mb-4 leading-tight">
+                    Privacy Policy
+                </h1>
+                <p class="text-sm text-slate-500 dark:text-slate-400 font-mono">
+                    Version 1.0.0 • Published: October 12, 2022
+                </p>
+            </div>
+
+            <article
+                class="prose prose-slate dark:prose-invert prose-lg max-w-none bg-white/60 dark:bg-slate-800/60 p-8 md:p-12 rounded-3xl border border-white/50 dark:border-slate-700 backdrop-blur-sm shadow-sm text-slate-600 dark:text-slate-400">
+                <p class="lead">
+                    This Privacy Policy describes our policies and procedures on the collection, use and disclosure of
+                    your information when you use the Service and tells you about your privacy rights and how the law
+                    protects you.
+                </p>
+                <p>
+                    We use your Personal data to provide and improve the Service. By using the Service, you agree to the
+                    collection and use of information in accordance with this Privacy Policy.
+                </p>
+
+                <hr>
+
+                <h3>Interpretation and Definitions</h3>
+
+                <h4>Interpretation</h4>
+                <p>
+                    The words of which the initial letter is capitalized have meanings defined under the following
+                    conditions. The following definitions shall have the same meaning regardless of whether they appear
+                    in singular or in plural.
+                </p>
+
+                <h4>Definitions</h4>
+                <p>For the purposes of this Privacy Policy:</p>
+                <ul>
+                    <li><strong>Account</strong> means a unique account created for you to access our Service or parts
+                        of our Service.</li>
+                    <li><strong>Affiliate</strong> means an entity that controls, is controlled by or is under common
+                        control with a party, where “control” means ownership of 50% or more of the shares, equity
+                        interest or other securities entitled to vote for election of directors or other managing
+                        authority.</li>
+                    <li><strong>Application</strong> means the software program provided by the Company downloaded by
+                        you on any electronic device, named SWIRL – Sell more with live video shopping.</li>
+                    <li><strong>Business</strong>, for the purpose of the CCPA (California Consumer Privacy Act), refers
+                        to the Company as the legal entity that collects Consumers’ personal information and determines
+                        the purposes and means of the processing of Consumers’ personal information, or on behalf of
+                        which such information is collected and that alone, or jointly with others, determines the
+                        purposes and means of the processing of consumers’ personal information, that does business in
+                        the State of California.</li>
+                    <li><strong>Company</strong> (referred to as either “the Company”, “We”, “Us” or “Our” in this
+                        Agreement) refers to <strong>Goswirl Technologies PVT. LTD</strong>, 1st Floor, 26 Hari Nagar
+                        Society, Gotri Road, Vadodara, Gujarat, India, 390015. <br>For the purpose of the GDPR, the
+                        Company is the Data Controller.</li>
+                    <li><strong>Consumer</strong>, for the purpose of the CCPA (California Consumer Privacy Act), means
+                        a natural person who is a California resident. A resident, as defined in the law, includes (1)
+                        every individual who is in the USA for other than a temporary or transitory purpose, and (2)
+                        every individual who is domiciled in the USA who is outside the USA for a temporary or
+                        transitory purpose.</li>
+                    <li><strong>Country</strong> refers to: Gujarat, India.</li>
+                    <li><strong>Data Controller</strong>, for the purposes of the GDPR (General Data Protection
+                        Regulation), refers to the Company as the legal person which alone or jointly with others
+                        determines the purposes and means of the processing of Personal Data.</li>
+                    <li><strong>Device</strong> means any device that can access the Service such as a computer, a
+                        cellphone or a digital tablet.</li>
+                    <li><strong>Do Not Track (DNT)</strong> is a concept that has been promoted by US regulatory
+                        authorities, in particular the U.S. Federal Trade Commission (FTC), for the Internet industry to
+                        develop and implement a mechanism for allowing internet users to control the tracking of their
+                        online activities across websites.</li>
+                    <li><strong>Personal Data</strong> is any information that relates to an identified or identifiable
+                        individual.
+                        <br>For the purposes for GDPR, Personal Data means any information relating to you such as a
+                        name, an identification number, location data, online identifier or to one or more factors
+                        specific to the physical, physiological, genetic, mental, economic, cultural or social identity.
+                        <br>For the purposes of the CCPA, Personal Data means any information that identifies, relates
+                        to, describes or is capable of being associated with, or could reasonably be linked, directly or
+                        indirectly, with you.
+                    </li>
+                    <li><strong>Sale</strong>, for the purpose of the CCPA (California Consumer Privacy Act), means
+                        selling, renting, releasing, disclosing, disseminating, making available, transferring, or
+                        otherwise communicating orally, in writing, or by electronic or other means, a Consumer’s
+                        personal information to another business or a third party for monetary or other valuable
+                        consideration.</li>
+                    <li><strong>Service</strong> refers to the Application.</li>
+                    <li><strong>Service Provider</strong> means any natural or legal person who processes the data on
+                        behalf of the Company. It refers to third-party companies or individuals employed by the Company
+                        to facilitate the Service, to provide the Service on behalf of the Company, to perform services
+                        related to the Service or to assist the Company in analysing how the Service is used. For the
+                        purpose of the GDPR, Service Providers are considered Data Processors.</li>
+                    <li><strong>Usage Data</strong> refers to data collected automatically, either generated by the use
+                        of the Service or from the Service infrastructure itself (for example, the duration of a page
+                        visit).</li>
+                    <li><strong>You</strong> means the individual accessing or using the Service, or the company, or
+                        other legal entity on behalf of which such individual is accessing or using the Service, as
+                        applicable. <br>Under GDPR (General Data Protection Regulation), You can be referred to as the
+                        Data Subject or as the User as you are the individual using the Service.</li>
+                </ul>
+
+                <hr>
+
+                <h3>Collecting and Using Your Personal Data</h3>
+
+                <h4>Personal Data</h4>
+                <p>While using our Service, we may ask you to provide us with certain personally identifiable
+                    information that can be used to contact or identify you. Personally identifiable information may
+                    include, but is not limited to:</p>
+                <ul>
+                    <li>Email address</li>
+                    <li>First name</li>
+                    <li>Phone number</li>
+                    <li>Usage Data</li>
+                </ul>
+
+                <h4>Usage Data</h4>
+                <p>Usage Data is collected automatically when using the Service. Usage Data may include information such
+                    as your Device’s Internet Protocol address (e.g. IP address), browser type, browser version, the
+                    pages of our Service that you visit, the time and date of your visit, the time spent on those pages,
+                    unique device identifiers and other diagnostic data.</p>
+                <p>When you access the Service by or through a mobile device, we may collect certain information
+                    automatically, including, but not limited to, the type of mobile device you use, your mobile device
+                    unique ID, the IP address of your mobile device, your mobile operating system, the type of mobile
+                    Internet browser you use, unique device identifiers and other diagnostic data.</p>
+                <p>We may also collect information that your browser sends whenever you visit our Service or when you
+                    access the Service by or through a mobile device.</p>
+
+                <h4>Information Collected while Using the Application</h4>
+                <p>While using our application, in order to provide features of our application, we may collect, with
+                    your prior permission:</p>
+                <ul>
+                    <li>Information from your Device’s phone book (contacts list)</li>
+                </ul>
+                <p>We use this information to provide features of our Service, to improve and customize our Service. The
+                    information may be uploaded to the Company’s servers and/or a Service Provider’s server or it may be
+                    simply stored on your device.</p>
+                <p>You can enable or disable access to this information at any time, through your Device settings.</p>
+
+                <h4>Use of Your Personal Data</h4>
+                <p>The Company may use Personal Data for the following purposes:</p>
+                <ul>
+                    <li><strong>To provide and maintain our Service</strong>, including to monitor the usage of our
+                        Service.</li>
+                    <li><strong>To manage Your Account:</strong> To manage your registration as a user of the Service.
+                        The Personal Data you provide can give you access to different functionalities of the Service
+                        that are available to you as a registered user.</li>
+                    <li><strong>For the performance of a contract:</strong> The development, compliance and undertaking
+                        of the purchase contract for the products, items or services you have purchased or of any other
+                        contract with us through the Service.</li>
+                    <li><strong>To contact You:</strong> To contact you by email, telephone calls, SMS, or other
+                        equivalent forms of electronic communication, such as a mobile application’s push notifications
+                        regarding updates or informative communications related to the functionalities, products or
+                        contracted services, including the security updates, when necessary or reasonable for their
+                        implementation.</li>
+                    <li><strong>To provide You with news, special offers and general information</strong> about other
+                        goods, services and events which we offer that are similar to those that you have already
+                        purchased or enquired about unless you have opted not to receive such information.</li>
+                    <li><strong>To manage Your requests:</strong> To attend and manage your requests to us.</li>
+                    <li><strong>For business transfers:</strong> We may use your information to evaluate or conduct a
+                        merger, divestiture, restructuring, re-organization, dissolution, or other sale or transfer of
+                        some or all of our assets, whether as a going concern or as part of bankruptcy, liquidation, or
+                        similar proceeding, in which Personal Data held by us about our Service users is among the
+                        assets transferred.</li>
+                    <li><strong>For other purposes:</strong> We may use your information for other purposes, such as
+                        data analysis, identifying usage trends, determining the effectiveness of our promotional
+                        campaigns and to evaluate and improve our Service, products, services, marketing and your
+                        experience.</li>
+                </ul>
+
+                <p>We may share your personal information in the following situations:</p>
+                <ul>
+                    <li><strong>With Service Providers:</strong> We may share your personal information with Service
+                        Providers to monitor and analyse the use of our Service, to contact you.</li>
+                    <li><strong>For business transfers:</strong> We may share or transfer your personal information in
+                        connection with, or during negotiations of, any merger, sale of Company assets, financing, or
+                        acquisition of all or a portion of our business to another company.</li>
+                    <li><strong>With Affiliates:</strong> We may share your information with our affiliates, in which
+                        case we will require those affiliates to honour this Privacy Policy. Affiliates include our
+                        parent company and any other subsidiaries, joint venture partners or other companies that we
+                        control or that are under common control with us.</li>
+                    <li><strong>With business partners:</strong> We may share your information with Our business
+                        partners to offer you certain products, services or promotions.</li>
+                    <li><strong>With other users:</strong> when you share personal information or otherwise interact in
+                        the public areas with other users, such information may be viewed by all users and may be
+                        publicly distributed outside.</li>
+                    <li><strong>With Your consent:</strong> We may disclose your personal information for any other
+                        purpose with your consent.</li>
+                </ul>
+
+                <h4>Retention of Your Personal Data</h4>
+                <p>The Company will retain your Personal Data only for as long as is necessary for the purposes set out
+                    in this Privacy Policy. We will retain and use your Personal Data to the extent necessary to comply
+                    with our legal obligations (for example, if we are required to retain your data to comply with
+                    applicable laws), resolve disputes, and enforce our legal agreements and policies. The company will
+                    also retain Usage Data for internal analysis purposes. Usage Data is generally retained for a
+                    shorter period of time, except when this data issued to strengthen the security or to improve the
+                    functionality of our Service, or We are legally obligated to retain this data for longer time
+                    periods.</p>
+
+                <h4>Transfer of Your Personal Data</h4>
+                <p>Your information, including Personal Data, is processed at the Company's operating offices and in any
+                    other places where the parties involved in the processing are located. It means that this
+                    information may be transferred to - and maintained on - computers located outside of your state,
+                    province, countries other governmental jurisdiction where the data protection laws may differ than
+                    those from your jurisdiction.</p>
+                <p>Your consent to this Privacy Policy followed by your submission of such information represents your
+                    agreement to that transfer.</p>
+                <p>The Company will take all steps reasonably necessary to ensure that your data is treated securely and
+                    in accordance with this Privacy Policy and no transfer of your Personal Data will take place to an
+                    organization or a country unless there are adequate controls in place including the security of your
+                    data and other personal information.</p>
+
+                <h4>Disclosure of Your Personal Data</h4>
+                <h5>Business Transactions</h5>
+                <p>If the Company is involved in a merger, acquisition or asset sale, your Personal Data may be
+                    transferred. We will provide notice before your Personal Data is transferred and becomes subject to
+                    a different Privacy Policy.</p>
+                <h5>Law enforcement</h5>
+                <p>Under certain circumstances, the Company may be required to disclose your Personal Data if required
+                    to do so by law or in response to valid requests by public authorities (e.g. a court or a government
+                    agency).</p>
+                <h5>Other legal requirements</h5>
+                <p>The Company may disclose your Personal Data in the good faith belief that such action is necessary
+                    to:</p>
+                <ul>
+                    <li>Comply with a legal obligation</li>
+                    <li>Protect and defend the rights or property of the Company</li>
+                    <li>Prevent or investigate possible wrongdoing in connection with the Service</li>
+                    <li>Protect the personal safety of Users of the Service or the public</li>
+                    <li>Protect against legal liability</li>
+                </ul>
+
+                <h4>Security of Your Personal Data</h4>
+                <p>The security of your Personal Data is important to us, but remember that no method of transmission
+                    over the Internet, or method of electronic storage is 100% secure. While we strive to use
+                    commercially acceptable means to protect Your Personal Data, we cannot guarantee its absolute
+                    security.</p>
+
+                <hr>
+
+                <h3>Detailed Information on the Processing of Your Personal Data</h3>
+                <p>The Service Providers we use may have access to your Personal Data. These third-party vendors
+                    collect, store, use, process and transfer information about your activity on our Service in
+                    accordance with their Privacy Policies.</p>
+
+                <h4>Analytics</h4>
+                <p>We may use third-party Service providers to monitor and analyse the use of our Service.</p>
+
+                <h5>Google Analytics</h5>
+                <p>Google Analytics is a web analytics service offered by Google that tracks and reports website
+                    traffic. Google uses the data collected to track and monitor the use of our Service. This data is
+                    shared with other Google services. Google may use the collected data to contextualize and
+                    personalize the ads of its own advertising network.</p>
+                <p>You may opt-out of certain Google Analytics features through your mobile device settings, such as
+                    your device advertising settings or by following the instructions provided by Google in their
+                    Privacy Policy.</p>
+                <p>For more information on the privacy practices of Google, please visit the Google Privacy & Terms web
+                    page.</p>
+
+                <h5>Firebase</h5>
+                <p>Firebase is an analytics service provided by Google Inc. You may opt-out of certain Firebase features
+                    through your mobile device settings, such as your device advertising settings or by following the
+                    instructions provided by Google in their Privacy Policy</p>
+                <p>We also encourage you to review the Google’s policy for safe guarding your data</p>
+                <p>For more information on what type of information Firebase collects, please visit the How Google uses
+                    data when you use our partners’ sites or apps webpage.</p>
+
+                <h4>Email Marketing</h4>
+                <p>We may use your Personal Data to contact you with newsletters, marketing or promotional materials and
+                    other information that may be of interest to you. You may opt-out of receiving any, or all, of these
+                    communications from us by following the unsubscribe link or instructions provided in any email we
+                    send or by contacting us.</p>
+                <p>We may use Email Marketing Service Providers to manage and send emails to you.</p>
+
+                <h5>Zoho Campaigns</h5>
+                <p>Their Privacy Policy can be viewed at Zoho</p>
+
+                <h5>Elastic Email</h5>
+                <p>Their Privacy Policy can be viewed at Elastic Email.</p>
+
+                <hr>
+
+                <h3>GDPR Privacy</h3>
+                <h4>Legal Basis for Processing Personal Data under GDPR</h4>
+                <p>We may process Personal Data under the following conditions:</p>
+                <ul>
+                    <li><strong>Consent:</strong> You have given Your consent for processing Personal Data for one or
+                        more specific purposes.</li>
+                    <li><strong>Performance of a contract:</strong> Provision of Personal Data is necessary for the
+                        performance of an agreement with You and/or for any pre-contractual obligations thereof.</li>
+                    <li><strong>Legal obligations:</strong> Processing Personal Data is necessary for compliance with a
+                        legal obligation to which the Company is subject.</li>
+                    <li><strong>Vital interests:</strong> Processing Personal Data is necessary in order to protect Your
+                        vital interests or of another natural person.</li>
+                    <li><strong>Public interests:</strong> Processing Personal Data is related to a task that is carried
+                        out in the public interest or in the exercise of official authority vested in the Company.</li>
+                    <li><strong>Legitimate interests:</strong> Processing Personal Data is necessary for the purposes of
+                        the legitimate interests pursued by the Company.</li>
+                </ul>
+                <p>In any case, the Company will gladly help to clarify the specific legal basis that applies to the
+                    processing, and in particular whether the provision of Personal Data is a statutory or contractual
+                    requirement, or a requirement necessary to enter into a contract.</p>
+
+                <h4>Your Rights under the GDPR</h4>
+                <p>The Company undertakes to respect the confidentiality of your Personal Data and to guarantee you can
+                    exercise your rights.</p>
+                <p>You have the right under this Privacy Policy, and by law if you are within the EU, to:</p>
+                <ul>
+                    <li><strong>Request access to Your Personal Data.</strong> The right to access, update or delete the
+                        information we have on you...</li>
+                    <li><strong>Request correction of the Personal Data that We hold about You.</strong> You have the
+                        right to have any incomplete or inaccurate information we hold about you corrected.</li>
+                    <li><strong>Object to processing of Your Personal Data.</strong> This right exists where we are
+                        relying on a legitimate interest...</li>
+                    <li><strong>Request erasure of Your Personal Data.</strong> You have the right to ask Us to delete
+                        or remove Personal Data when there is no good reason for Us to continue processing it.</li>
+                    <li><strong>Request the transfer of Your Personal Data.</strong> We will provide to you, or to a
+                        third-party you have chosen, your Personal Data in a structured, commonly used, machine-readable
+                        format...</li>
+                    <li><strong>Withdraw Your consent.</strong> You have the right to withdraw Your consent on using
+                        your Personal Data...</li>
+                </ul>
+
+                <h4>Exercising of Your GDPR Data Protection Rights</h4>
+                <p>You may exercise your rights of access, rectification, cancellation and opposition by contacting us.
+                    Please note that we may ask you to verify your identity before responding to such requests. If you
+                    make a request, we will try our best to respond to you as soon as possible.</p>
+                <p>You have the right to complain to a Data Protection Authority about our collection and use of your
+                    Personal Data. For more information, if you are in the European Economic Area (EEA), please contact
+                    your local data protection authority in the EEA.</p>
+
+                <hr>
+
+                <h3>CCPA Privacy</h3>
+                <p>This privacy notice section for California residents supplements the information contained in Our
+                    Privacy Policy and it applies solely to all visitors, users, and others who reside in the State of
+                    California.</p>
+
+                <h4>Categories of Personal Information Collected</h4>
+                <p>We collect information that identifies, relates to, describes, references, is capable of being
+                    associated with, or could reasonably be linked, directly or indirectly, with a particular Consumer
+                    or Device. The following is a list of categories of personal information which we may collect or may
+                    have been collected from California residents within the last twelve (12) months.</p>
+
+                <ul>
+                    <li><strong>Category A: Identifiers.</strong> <br>Collected: Yes</li>
+                    <li><strong>Category B: Personal information categories listed in the California Customer Records
+                            statute.</strong> <br>Collected: Yes</li>
+                    <li><strong>Category C: Protected classification characteristics under California or federal
+                            law.</strong> <br>Collected: No</li>
+                    <li><strong>Category D: Commercial information.</strong> <br>Collected: No</li>
+                    <li><strong>Category E: Biometric information.</strong> <br>Collected: No</li>
+                    <li><strong>Category F: Internet or other similar network activity.</strong> <br>Collected: Yes</li>
+                    <li><strong>Category G: Geolocation data.</strong> <br>Collected: No</li>
+                    <li><strong>Category H: Sensory data.</strong> <br>Collected: No</li>
+                    <li><strong>Category I: Professional or employment-related information.</strong> <br>Collected: No
+                    </li>
+                    <li><strong>Category J: Non-public education information.</strong> <br>Collected: No</li>
+                    <li><strong>Category K: Inferences drawn from other personal information.</strong> <br>Collected: No
+                    </li>
+                </ul>
+
+                <p>Under CCPA, personal information does not include:</p>
+                <ul>
+                    <li>Publicly available information from government records</li>
+                    <li>De-identified or aggregated consumer information</li>
+                    <li>Information excluded from the CCPA’s scope, such as Health or medical information covered by
+                        HIPAA and CMIA, or Personal Information covered by certain sector-specific privacy laws (FRCA,
+                        GLBA, FIPA, etc.)</li>
+                </ul>
+
+                <h4>Sources of Personal Information</h4>
+                <p>We obtain the categories of personal information listed above from the following categories of
+                    sources:</p>
+                <ul>
+                    <li><strong>Directly from You.</strong> For example, from the forms you complete on our Service.
+                    </li>
+                    <li><strong>Indirectly from You.</strong> For example, from observing your activity on our Service.
+                    </li>
+                    <li><strong>Automatically from You.</strong> For example, through cookies we or our Service
+                        Providers set on your Device.</li>
+                    <li><strong>From Service Providers.</strong> For example, third-party vendors to monitor and analyse
+                        the use of our Service.</li>
+                </ul>
+
+                <h4>Use of Personal Information for Business Purposes or Commercial Purposes</h4>
+                <p>We may use or disclose personal information we collect for “business purposes” or “commercial
+                    purposes” (as defined under the CCPA), which may include the following examples:</p>
+                <ul>
+                    <li>To operate our Service and provide you with our Service.</li>
+                    <li>To provide you with support and to respond to your inquiries...</li>
+                    <li>To fulfil or meet the reason you provided the information...</li>
+                    <li>To respond to law enforcement requests...</li>
+                    <li>For internal administrative and auditing purposes.</li>
+                    <li>To detect security incidents...</li>
+                </ul>
+
+                <h4>Disclosure of Personal Information for Business Purposes or Commercial Purposes</h4>
+                <p>We may use or disclose and may have used or disclosed in the last twelve(12) months the following
+                    categories of personal information for business or commercial purposes:</p>
+                <ul>
+                    <li>Category A: Identifiers</li>
+                    <li>Category B: Personal information categories listed in the California Customer Records statute
+                        (Cal. Civ. Code § 1798.80(e))</li>
+                    <li>Category F: Internet or other similar network activity</li>
+                </ul>
+
+                <h4>Sale of Personal Information</h4>
+                <p>As defined in the CCPA, “sell” and “sale” mean selling, renting... We may sell and may have sold in
+                    the last twelve (12) months the following categories of personal information:</p>
+                <ul>
+                    <li>Category A: Identifiers</li>
+                    <li>Category B: Personal information categories listed in the California Customer Records statute
+                        (Cal. Civ. Code § 1798.80(e))</li>
+                    <li>Category F: Internet or other similar network activity</li>
+                </ul>
+
+                <h4>Share of Personal Information</h4>
+                <p>We may share your personal information identified in the above categories with the following
+                    categories of third parties:</p>
+                <ul>
+                    <li>Service Providers</li>
+                    <li>Our affiliates</li>
+                    <li>Our business partners</li>
+                    <li>Third party vendors to whom you or your agents authorize Us to disclose your personal
+                        information...</li>
+                </ul>
+
+                <h4>Sale of Personal Information of Minors Under 16 Years of Age</h4>
+                <p>We do not knowingly collect personal information from minors under the age of 16 through our
+                    Service... We do not sell the personal information of Consumers we actually know are less than 16
+                    years of age, unless we receive affirmative authorization...</p>
+
+                <h4>Your Rights under the CCPA</h4>
+                <p>The CCPA provides California residents with specific rights regarding their personal information. If
+                    you are a resident of California, you have the following rights:</p>
+                <ul>
+                    <li><strong>The right to notice.</strong> You have the right to be notified which categories of
+                        Personal Data are being collected and the purposes for which the Personal Data is being used.
+                    </li>
+                    <li><strong>The right to request.</strong> Under CCPA, you have the right to request that We
+                        disclose information to you about our collection, use, sale, disclosure for business purposes
+                        and share of personal information.</li>
+                    <li><strong>The right to say no to the sale of Personal Data (opt-out).</strong> You have the right
+                        to direct us to not sell your personal information.</li>
+                    <li><strong>The right to delete Personal Data.</strong> You have the right to request the deletion
+                        of your Personal Data, subject to certain exceptions.</li>
+                    <li><strong>The right not to be discriminated against.</strong> You have the right not to be
+                        discriminated against for exercising any of your consumer’s rights.</li>
+                </ul>
+
+                <h4>Exercising Your CCPA Data Protection Rights</h4>
+                <p>In order to exercise any of your rights under the CCPA, and if you are a California resident, you can
+                    contact Us:</p>
+                <ul>
+                    <li>By email: <a href="mailto:support@goswirl.live">support@goswirl.live</a></li>
+                    <li>By visiting this page on our website: <a href="contact.html">Connect With Swirl</a></li>
+                </ul>
+
+                <h4>Do Not Sell My Personal Information</h4>
+                <p>You have the right to opt-out of the sale of your personal information... Please note that any opt
+                    out is specific to the browser you use...</p>
+
+                <h5>Website</h5>
+                <p>You can opt out of receiving ads that are personalized as served by our Service Providers by
+                    following our instructions presented on the Service:</p>
+                <ul>
+                    <li>The NAI’s opt-out platform</li>
+                    <li>The EDAA’s opt-out platform</li>
+                    <li>The DAA’s opt-out platform</li>
+                </ul>
+
+                <h5>Mobile Devices</h5>
+                <p>Your mobile device may give you the ability to opt out of the use of information about the apps you
+                    use in order to serve you ads that are targeted to your interests...</p>
+
+                <h4>“Do Not Track” Policy as Required by California Online Privacy Protection Act (Cal OPPA)</h4>
+                <p>Our Service does not respond to Do Not Track signals. However, some third-party websites do keep
+                    track of your browsing activities...</p>
+
+                <h4>Children’s Privacy</h4>
+                <p>Our Service does not address anyone under the age of 13. We do not knowingly collect personally
+                    identifiable information from anyone under the age of 13...</p>
+
+                <h4>Your California Privacy Rights (California’s Shine the Light law)</h4>
+                <p>Under California Civil Code Section 1798 (California’s Shine the Light law), California residents
+                    with an established business relationship with us can request information once a year about sharing
+                    their Personal Data with third parties for the third parties’ direct marketing purposes...</p>
+
+                <h4>California Privacy Rights for Minor Users (California Business and Professions Code Section 22581)
+                </h4>
+                <p>California Business and Professions Code section 22581 allow California residents under the age of 18
+                    who are registered users of online sites, services or applications to request and obtain removal of
+                    content or information they have publicly posted...</p>
+
+                <h4>Links to Other Websites</h4>
+                <p>Our Service may contain links to other websites that are not operated by us. If you click on a
+                    third-party link, you will be directed to that third-party’s site. We strongly advise you to review
+                    the Privacy Policy of every site you visit. We have no control over and assume no responsibility for
+                    the content, privacy policies or practices of any third-party sites or services.</p>
+
+                <hr>
+
+                <h3>Changes to this Privacy Policy</h3>
+                <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the
+                    new Privacy Policy on this page.</p>
+                <p>We will let you know via email and/or a prominent notice on our Service, prior to the change becoming
+                    effective and update the “Last updated” date at the top of this Privacy Policy.</p>
+                <p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy
+                    Policy are effective when they are posted on this page.</p>
+
+                <h3>Contact us</h3>
+                <p>If you have any questions about this Privacy Policy, you can reach us at: <a
+                        href="mailto:support@goswirl.live">support@goswirl.live</a></p>
+
+            </article>
+        </div>
+    </main>
+
+    <footer
+        class="bg-slate-50 dark:bg-background-dark py-16 px-10 border-t border-slate-200 dark:border-slate-800 relative z-[100]">
+        <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+            <div class="space-y-6">
+                <div class="flex items-center gap-3 text-primary dark:text-white">
+                    <div class="size-6">
+                        <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path clip-rule="evenodd"
+                                d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z"
+                                fill="currentColor" fill-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <span class="font-bold text-lg tracking-tight uppercase font-display">SWIRL AI</span>
+                </div>
+                <p class="text-sm text-slate-500 max-w-xs leading-relaxed font-medium">
+                    The intelligence layer for global luxury commerce. Empowering heritage houses with future-proof AI.
+                </p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 w-full md:w-auto">
+                <div class="space-y-4">
+                    <p class="text-xs font-semibold tracking-wide text-slate-900 dark:text-white">Platform</p>
+                    <nav class="flex flex-col gap-2 text-sm text-slate-500">
+                        <a class="hover:text-primary" href="#">Engine</a>
+                        <a class="hover:text-primary" href="#">Neural Sync</a>
+                        <a class="hover:text-primary" href="#">Terminal</a>
+                    </nav>
+                </div>
+                <div class="space-y-4">
+                    <p class="text-xs font-semibold tracking-wide text-slate-900 dark:text-white">Company</p>
+                    <nav class="flex flex-col gap-2 text-sm text-slate-500">
+                        <a class="hover:text-primary" href="about.html">About</a>
+                        <a class="hover:text-primary" href="#">Insights</a>
+                        <a class="hover:text-primary" href="contact.html">Contact</a>
+                    </nav>
+                </div>
+                <div class="space-y-4">
+                    <p class="text-xs font-semibold tracking-wide text-slate-900 dark:text-white">Legal</p>
+                    <nav class="flex flex-col gap-2 text-sm text-slate-500">
+                        <a class="hover:text-primary" href="privacy.html">Privacy</a>
+                        <a class="hover:text-primary" href="#">Security</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-[1200px] mx-auto mt-16 pt-8 border-t border-slate-200 dark:border-slate-800 text-center">
+            <p class="text-xs text-slate-400 font-medium tracking-wide">© 2024 Swirl AI Platforms. All rights reserved.
+            </p>
+        </div>
+    </footer>
+</body>
+
+</html>

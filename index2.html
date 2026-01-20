@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SWIRL Orbital Motion Engine</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#000281",
+                        "background-light": "#ffffff",
+                        "background-dark": "#050505",
+                        "card-blue": "#eff6ff",
+                        "card-peach": "#fff7ed",
+                        "card-lavender": "#f5f3ff",
+                        "card-mint": "#f0fdf4",
+                        accent: "#000281",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                        mono: ["JetBrains Mono", "monospace"],
+                        serif: ["Playfair Display", "serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "12px",
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'orbit': 'orbit 12s linear infinite',
+                        'reverse-orbit': 'reverse-orbit 12s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow-sync': 'glow-sync 12s linear infinite',
+                    },
+                    keyframes: {
+                        orbit: {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' },
+                        },
+                        'reverse-orbit': {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(-360deg)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        'glow-sync': {
+                            '0%, 100%': { boxShadow: '0 0 60px 20px rgba(0, 2, 129, 0.25)' },
+                            '25%': { boxShadow: '0 0 80px 30px rgba(0, 2, 129, 0.15)' },
+                            '50%': { boxShadow: '0 0 60px 20px rgba(0, 2, 129, 0.25)' },
+                            '75%': { boxShadow: '0 0 80px 30px rgba(0, 2, 129, 0.15)' },
+                        }
+                    }
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        .edge-fade::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+
+            background:
+                linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0) 20%),
+                linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0) 20%),
+                linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0) 20%),
+                linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0) 20%);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 2, 129, 0.05);
+            box-shadow: 0 20px 40px rgba(0, 2, 129, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dark .glass-card {
+            background: rgba(15, 15, 15, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px rgba(0, 2, 129, 0.12);
+        }
+
+        .orb-glow {
+            box-shadow: 0 0 60px 20px rgba(0, 2, 129, 0.15);
+        }
+        .dashboard-tilt {
+            transform: perspective(1200px) rotateX(15deg) translateY(0px);
+            transition: transform 0.5s ease-out;
+        }
+
+        .dashboard-tilt:hover {
+            transform: perspective(1200px) rotateX(10deg) translateY(-10px);
+        }
+
+        .mobile-tilt {
+            transform: perspective(1200px) rotateX(10deg) rotateY(15deg) translateZ(50px);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 2, 129, 0.05);
+            box-shadow: 0 20px 40px rgba(0, 2, 129, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .dark .glass-card {
+            background: rgba(15, 15, 15, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px rgba(0, 2, 129, 0.12);
+        }
+        .orb-glow {
+            box-shadow: 0 0 60px 20px rgba(0, 2, 129, 0.15);
+        }
+        .dark .orb-glow {
+            box-shadow: 0 0 80px 30px rgba(0, 2, 129, 0.3);
+        }
+        .orbit-icon-container {
+            @apply absolute w-10 h-10 flex items-center justify-center bg-white dark:bg-slate-900 border border-primary/20 rounded-full shadow-lg text-primary;
+        }
+        .luminous-sphere {
+            @apply absolute w-6 h-6 bg-primary rounded-full;
+            box-shadow: 0 0 20px 8px rgba(0, 2, 129, 0.4), 0 0 40px 12px rgba(0, 2, 129, 0.2);
+        }
+                .marquee {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 6rem;
+            width: max-content;
+            animation: marquee-scroll 40s linear infinite;
+        }
+
+        .marquee-track img {
+            height: 2.25rem;
+            object-fit: contain;
+            filter: grayscale(100%);
+            opacity: 0.4;
+            transition: all 0.4s ease;
+        }
+
+        .marquee:hover img {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        .marquee:hover .marquee-track {
+            animation-play-state: paused;
+        }
+
+        @keyframes marquee-scroll {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+           :root {
+            --primary-blue: rgba(0, 2, 129, 1);
+            --grid-color: rgba(0, 2, 129, 0.04);
+        }
+
+        .micro-grid {
+            background-image: linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .bento-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 2, 129, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dark .bento-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .bento-card:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 2, 129, 0.05);
+        }
+
+        .editorial-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 14rem;
+            line-height: 1;
+            opacity: 0.03;
+            position: absolute;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .glass-gradient {
+            background: radial-gradient(circle at top right, rgba(0, 2, 129, 0.05), transparent);
+        }
+
+        .progress-bar {
+            height: 2px;
+            background: rgba(0, 2, 129, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: var(--primary-blue);
+        }
+
+        .sky-gradient {
+            background: radial-gradient(circle at 50% 0%, rgba(186, 230, 253, 0.4) 0%, rgba(255, 255, 255, 0) 70%),
+                linear-gradient(to bottom, #f0f9ff, #ffffff);
+        }
+          .testimonial-gradient {
+            background: linear-gradient(135deg, rgba(240, 244, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
+        }
+
+        .dark .testimonial-gradient {
+            background: linear-gradient(135deg, rgba(10, 15, 45, 1) 0%, rgba(2, 4, 26, 1) 100%);
+        }
+        .blob-gradient {
+            background: radial-gradient(circle at center, rgba(0, 2, 129, 0.15) 0%, transparent 70%);
+        }
+         .glass-panel-nav {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+        .feature-stack {
+            display: grid;
+            grid-template-columns: 1fr;
+            align-items: start;
+        }
+        .feature-card {
+            position: relative;
+            transition: transform 0.3s ease-out;
+            box-shadow: 0 -10px 40px -15px rgba(0,0,0,0.08);
+        }
+        @media (min-width: 768px) {
+            .feature-card {
+                position: sticky;
+                top: 10vh;
+            }
+        }
+        .grid-bg {
+            background-image: radial-gradient(circle, #e2e8f0 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .dark .grid-bg {
+            background-image: radial-gradient(circle, #1e293b 1px, transparent 1px);
+        }
+        .glass-widget {
+            @apply bg-white/70 backdrop-blur-xl border border-white/50 shadow-xl rounded-2xl p-6;
+        }
+        .dark .glass-widget {
+            @apply bg-slate-800/60 border-slate-700/50;
+        }
+        @keyframes pulse-line {
+            0% { stroke-dashoffset: 100; opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { stroke-dashoffset: 0; opacity: 0.3; }
+        }
+        .animate-pulse-line {
+            stroke-dasharray: 10;
+            animation: pulse-line 3s linear infinite;
+        }
+    </style>
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+    </script>
+</head>
+
+<body>
+    <div
+        class="font-sans antialiased bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 selection:bg-primary selection:text-white">
+        <nav class="fixed top-0 left-0 right-0 z-50 flex justify-center p-4">
+            <div
+                class="max-w-7xl w-full flex items-center justify-between px-6 py-3 rounded-full glass-panel-nav shadow-sm relative z-50">
+                <div class="flex items-center gap-8">
+                    <a class="flex items-center gap-2 group" href="#">
+
+                        <span class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">SWIRL</span>
+                    </a>
+                    <div class="hidden md:flex items-center gap-1">
+                        <a class="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white transition-colors bg-slate-100 dark:bg-slate-800 rounded-full"
+                            href="#">Home</a>
+                        <a class="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white transition-colors"
+                            href="about.html">About Us</a>
+                        <a class="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white transition-colors"
+                            href="contact.html">Contact</a>
+                        <a class="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white transition-colors"
+                            href="pricing.html">Pricing</a>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+
+                    <a class="hidden sm:block bg-primary text-white px-5 py-2.5 rounded-full text-sm font-bold shadow-lg shadow-blue-900/20 hover:scale-105 transition-transform"
+                        href="#">Get Started</a>
+
+                    <!-- Mobile Menu Button -->
+                    <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-600 dark:text-slate-300">
+                        <span class="material-icons-outlined">menu</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu"
+                class="hidden absolute top-20 left-4 right-4 bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-6 flex flex-col gap-4 z-40">
+                <a class="text-sm font-semibold text-slate-900 dark:text-white py-2 border-b border-slate-100 dark:border-slate-800"
+                    href="#">Home</a>
+                <a class="text-sm font-semibold text-slate-600 dark:text-slate-400 py-2 border-b border-slate-100 dark:border-slate-800"
+                    href="about.html">About Us</a>
+                <a class="text-sm font-semibold text-slate-600 dark:text-slate-400 py-2 border-b border-slate-100 dark:border-slate-800"
+                    href="contact.html">Contact</a>
+                <a class="text-sm font-semibold text-slate-600 dark:text-slate-400 py-2 border-b border-slate-100 dark:border-slate-800"
+                    href="pricing.html">Pricing</a>
+                <div class="flex items-center justify-between pt-2">
+                    <a class="text-sm font-semibold text-slate-900 dark:text-white" href="#">Log in</a>
+                    <a class="bg-primary text-white px-5 py-2.5 rounded-full text-sm font-bold" href="#">Get Started</a>
+                </div>
+            </div>
+        </nav>
+        <main class="relative overflow-hidden sky-gradient min-h-screen flex items-center">
+            <!-- Soft background glow -->
+            <div class="absolute top-24 left-[8%] w-72 h-40 bg-blue-200/40 blur-3xl rounded-full"></div>
+            <div class="absolute bottom-32 right-[10%] w-96 h-48 bg-blue-300/30 blur-3xl rounded-full"></div>
+
+            <div class="relative z-10 max-w-7xl mx-auto px-6 mt-20 w-full">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+                    <!-- LEFT: Content -->
+                    <div>
+                        <h1
+                            class="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-900 tracking-tight leading-tight mb-6">
+                            Make Your Buyers
+                            <br />
+                            <span class="text-primary">
+                                Extraordinarily Confident
+                            </span>
+                        </h1>
+
+                        <p class="max-w-xl text-lg text-slate-600 mb-10 leading-relaxed">
+                            Analyze datasets, uncover intent, and guide high-consideration buyers
+                            with AI-driven conversations — not static pages.
+                        </p>
+
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button
+                                class="px-8 py-3.5 bg-primary text-white font-semibold rounded-full shadow-xl shadow-blue-900/25 hover:-translate-y-0.5 hover:shadow-2xl transition-all">
+                                Try for free
+                            </button>
+
+                            <button
+                                class="px-8 py-3.5 bg-white border border-slate-300 text-slate-900 font-semibold rounded-full flex items-center gap-3 hover:bg-slate-50 transition">
+                                <span class="w-2.5 h-2.5 bg-green-400 rounded-full animate-pulse"></span>
+                                Schedule a demo
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: Video -->
+                    <div class="relative bg-slate-50">
+                        <div class="relative rounded-3xl overflow-hidden w-full ">
+
+                            <video src="./assets/hero.mp4" autoplay loop muted height="100%"></video>
+
+                            <!-- Optional overlay UI (luxury feel) -->
+                            <!-- <div
+                                class="absolute bottom-6 left-6 right-6 bg-white/80 backdrop-blur rounded-2xl p-4 flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                                        <span class="material-icons-outlined text-primary text-lg">
+                                            graphic_eq
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-900">
+                                            Agent Active
+                                        </p>
+                                        <p class="text-xs text-slate-500">
+                                            Intent detected · Guidance in progress
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="text-sm font-semibold text-primary">
+                                    98% confidence
+                                </div>
+                            </div> -->
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Bottom fade -->
+            <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
+        </main>
+
+        <section class="bg-white py-20 border-t border-gray-100 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6">
+                <p class="text-center text-xs font-medium text-slate-500 tracking-wide mb-12">
+                    Leading enterprises scale with Swirl
+                </p>
+
+                <div class="marquee">
+                    <div class="marquee-track">
+                        <!-- SET 1 -->
+                        <img src="./assets/al-badia.png" />
+                        <img src="./assets/Al-Futtaim.png" />
+                        <img src="./assets/BYD.png" />
+                        <img src="./assets/Denza_logo.png" />
+                        <img src="./assets/LG.png" />
+                        <img src="./assets/Vivo.png" />
+                        <img src="./assets/yangwang.png" />
+
+                        <!-- SET 2 (DUPLICATE — REQUIRED) -->
+                        <img src="./assets/al-badia.png" />
+                        <img src="./assets/Al-Futtaim.png" />
+                        <img src="./assets/BYD.png" />
+                        <img src="./assets/Denza_logo.png" />
+                        <img src="./assets/LG.png" />
+                        <img src="./assets/Vivo.png" />
+                        <img src="./assets/yangwang.png" />
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="font-display bg-background-white text-slate-900 dark:text-slate-100 antialiased grid-bg">
+        <!-- Features Section -->
+        <section class="relative py-28 bg-gradient-to-b from-primary-50 via-white to-primary-50">
+            <div class="max-w-7xl mx-auto px-6 text-center">
+
+                <!-- Section Label -->
+                <span class="text-sm tracking-widest text-primary-600 font-semibold">
+                    FEATURES
+                </span>
+
+                <!-- Heading -->
+                <h2 class="mt-4 text-4xl md:text-5xl font-bold  leading-tight text-primary">
+                    Start Managing Buyers <br class="hidden md:block" />
+                    <span class="text-slate-600">the Smarter Way</span>
+                </h2>
+
+                <!-- Subtext -->
+                <p class="mt-6 max-w-2xl mx-auto text-slate-600 text-lg">
+                    Pages and filters slow buyers down. Conversations move them forward.
+                </p>
+
+                <!-- Cards -->
+                <div class="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
+
+                    <!-- Card 1 -->
+                    <div class="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center mb-6">
+                            <span class="material-icons-outlined text-primary">
+                                chat_bubble
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-slate-900 mb-3">
+                            Understands Buyer Context
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            The AI adapts to intent, constraints, and use cases — not static forms.
+                        </p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center mb-6">
+                            <span class="material-icons-outlined text-primary">
+                                check_box
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-slate-900 mb-3">
+                            Shortlists What Matters
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Buyers see 2–3 relevant options instead of navigating hundreds of SKUs.
+                        </p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center mb-6">
+                            <span class="material-icons-outlined text-primary">
+                                format_align_left
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-slate-900 mb-3">
+                            Explains Trade-offs Clearly
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Plain-language comparisons without jargon, specs, or sales pressure.
+                        </p>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center mb-6">
+                            <span class="material-icons-outlined text-primary">
+                                shopping_cart
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-slate-900 mb-3">
+                            Completes the Journey
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Compare, configure, finance, book, trade-in — guided end-to-end.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-6 pb-40">
+            <div class="feature-stack gap-20">
+                <div
+                    class="feature-card bg-card-blue dark:bg-slate-900/95 backdrop-blur-md border border-white/50 dark:border-slate-800 rounded-3xl p-8 md:p-16 min-h-[600px] flex flex-col md:flex-row items-center gap-12 mb-10">
+                    <div class="flex-1 space-y-6 text-left">
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 dark:bg-slate-800 shadow-sm text-xs font-semibold tracking-wide uppercase text-primary">
+                            <span class="w-1.5 h-1.5 rounded-full bg-primary"></span> NUDGES
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white leading-tight">The
+                            Nudge
+                            System</h2>
+                        <p class="text-slate-600 dark:text-slate-400 text-lg">An intelligent system that automatically
+                            triggers engagement actions based on real-time user behavioral signals.</p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3">
+                                <span class="material-symbols-outlined text-primary text-xl mt-0.5">check_circle</span>
+                                <p class="text-slate-700 dark:text-slate-300 font-medium">Scroll depth: <span
+                                        class="text-slate-500 font-normal">Buyer lingers on a specific product</span>
+                                </p>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="material-symbols-outlined text-primary text-xl mt-0.5">check_circle</span>
+                                <p class="text-slate-700 dark:text-slate-300 font-medium">Hover intent: <span
+                                        class="text-slate-500 font-normal">Mouse hovers over features or
+                                        comparisons</span>
+                                </p>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="material-symbols-outlined text-primary text-xl mt-0.5">check_circle</span>
+                                <p class="text-slate-700 dark:text-slate-300 font-medium">Idle time: <span
+                                        class="text-slate-500 font-normal">Visitor stops browsing, appears lost</span>
+                                </p>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="material-symbols-outlined text-primary text-xl mt-0.5">check_circle</span>
+                                <p class="text-slate-700 dark:text-slate-300 font-medium">Exit intent: <span
+                                        class="text-slate-500 font-normal">About to leave the page</span></p>
+                            </li>
+                        </ul>
+                        <button
+                            class="bg-primary hover:opacity-90 transition-all text-white px-8 py-3.5 rounded-full font-semibold shadow-lg shadow-blue-900/20 uppercase text-xs tracking-widest">Explore
+                            Logic</button>
+                    </div>
+                    <div class="flex-1 w-full">
+                        <img src="./assets/nudge.gif" class="w-full h-full object-contain rounded-2xl" />
+
+                    </div>
+                </div>
+                <div
+                    class="feature-card bg-card-peach dark:bg-slate-900/95 backdrop-blur-md border border-white/50 dark:border-slate-800 rounded-3xl p-8 md:p-16 min-h-[600px] flex flex-col md:flex-row items-center gap-12 mb-10">
+                    <div class="flex-1 space-y-6 text-left">
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 dark:bg-slate-800 shadow-sm text-xs font-semibold tracking-wide uppercase text-primary">
+                            <span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Speaks
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white leading-tight">
+                            Understands
+                            intent from messy, natural language</h2>
+                        <p class="text-slate-600 dark:text-slate-400 text-lg">Builds expert-grade shortlists with clear
+                            reasons to buy.</p>
+
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3">
+                                <span
+                                    class="material-symbols-outlined text-primary text-lg mt-0.5">record_voice_over</span>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm">Hands-free browsing &amp;
+                                    accessibility (Text + Voice)</p>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="material-symbols-outlined text-primary text-lg mt-0.5">diversity_3</span>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm">Natural, human-like buying
+                                    experience
+                                    (Voice only)</p>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="material-symbols-outlined text-primary text-lg mt-0.5">translate</span>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm">Supports 50+ languages (both voice
+                                    &amp; text)</p>
+                            </li>
+                        </ul>
+                        <button
+                            class="bg-primary hover:opacity-90 transition-all text-white px-8 py-3.5 rounded-full font-semibold shadow-lg shadow-blue-900/20 uppercase text-xs tracking-widest mt-4">Explore
+                            Intent</button>
+                    </div>
+                    <div class="flex-1 w-full">
+                        <!-- Overlapping Communication Modes -->
+                        <div class="relative h-[450px] md:h-[550px]">
+                            <!-- Two-Way Communication (Background) -->
+                            <div class="absolute top-0 right-0 w-[90%] md:w-[85%] z-10">
+                                <div
+                                    class="relative rounded-2xl overflow-hidden bg-white/40 dark:bg-slate-800/40 border-2 border-white/50 shadow-xl">
+                                    <img src="./assets/Step1.gif" alt="Two-Way Communication"
+                                        class="w-full h-full object-contain" />
+                                </div>
+                                <div class="mt-2 text-right pr-4">
+                                    <h4 class="text-xs font-bold text-primary uppercase tracking-wider">Two-Way</h4>
+                                    <p class="text-[10px] text-slate-500 dark:text-slate-400">Voice Only Mode</p>
+                                </div>
+                            </div>
+                            <!-- One-Way Communication (Foreground) -->
+                            <div class="absolute bottom-0 left-0 w-[90%] md:w-[85%] z-20">
+                                <div
+                                    class="relative rounded-2xl overflow-hidden bg-white/40 dark:bg-slate-800/40 border-2 border-white/50 shadow-2xl">
+                                    <img src="./assets/oneway.gif" alt="One-Way Communication"
+                                        class="w-full h-full object-contain" />
+                                </div>
+                                <div class="mt-2 pl-4">
+                                    <h4 class="text-xs font-bold text-primary uppercase tracking-wider">One-Way</h4>
+                                    <p class="text-[10px] text-slate-500 dark:text-slate-400">Text + Voice Response</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="feature-card bg-card-mint dark:bg-slate-900/95 backdrop-blur-md border border-white/50 dark:border-slate-800 rounded-3xl p-8 md:p-16 min-h-[600px] flex flex-col md:flex-row items-center gap-12 mb-10">
+                    <div class="flex-1 space-y-6 text-left">
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 dark:bg-slate-800 shadow-sm text-xs font-semibold tracking-wide uppercase text-green-600">
+                            <span class="w-1.5 h-1.5 rounded-full bg-green-600"></span> ACTS
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white leading-tight">AI
+                            doesn’t
+                            just answer. It cothe journey.mpletes </h2>
+                        <p class="text-slate-600 dark:text-slate-400 text-lg font-medium">Browser Autonomy
+                            (Showroom-like
+                            experience). <span class="block text-base font-normal mt-1">No more clicking through 10
+                                pages.
+                                No forms to fill. Just one conversation.</span></p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3">
+                                <span class="material-symbols-outlined text-primary text-xl">open_in_browser</span>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm">Navigates pages and applies
+                                    filters
+                                    for the buyer</p>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="material-symbols-outlined text-primary text-xl">compare_arrows</span>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm">Compares products side-by-side
+                                    with
+                                    trade-offs explained</p>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="material-symbols-outlined text-primary text-xl">inventory_2</span>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm">Checks real-time inventory across
+                                    dealerships or locations</p>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="material-symbols-outlined text-primary text-xl">task_alt</span>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm">Completes multi-step tasks: <span
+                                        class="font-bold">search → filter → compare → book</span></p>
+                            </li>
+                        </ul>
+                        <button
+                            class="bg-primary hover:opacity-90 transition-all text-white px-10 py-4 rounded-full font-bold shadow-lg shadow-blue-900/20 uppercase text-xs tracking-widest mt-4">Activate
+                            Agent</button>
+                    </div>
+                    <div class="flex-1 w-full">
+                        <!-- <div class="glass-widget h-[480px] flex flex-col justify-between border-green-100/30"> -->
+                        <img src='./assets/Step3.gif' alt="act" class="w-full h-full object-cover rounded-2xl" />
+                        <!-- </div> -->
+                    </div>
+                </div>
+                <div
+                    class="feature-card bg-card-lavender dark:bg-slate-900/95 backdrop-blur-md border border-white/50 dark:border-slate-800 rounded-3xl p-8 md:p-16 min-h-[600px] flex flex-col md:flex-row items-center gap-12 mb-10">
+                    <div class="flex-1 space-y-6 text-left">
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 dark:bg-slate-800 shadow-sm text-xs font-semibold tracking-wide uppercase text-purple-600">
+                            <span class="w-1.5 h-1.5 rounded-full bg-purple-600"></span> LEARNS
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white leading-tight">Step 4:
+                            Actionable Intelligence</h2>
+                        <p class="text-slate-600 dark:text-slate-400 text-lg">Every conversation becomes actionable
+                            customer, product, and revenue intelligence within our Insights Hub. Push insights back into
+                            your CRM with one click.</p>
+                        <div class="grid grid-cols-3 gap-4 pt-6 border-t border-purple-100 dark:border-slate-800">
+                            <div class="space-y-3">
+                                <span class="material-symbols-outlined text-primary text-2xl">person_search</span>
+                                <div>
+                                    <h4 class="text-[11px] font-bold text-slate-900 dark:text-white uppercase mb-1">
+                                        Customer
+                                    </h4>
+                                    <ul class="text-[11px] text-slate-500 space-y-1">
+                                        <li>• Who’s buying</li>
+                                        <li>• Persona mapping</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="space-y-3">
+                                <span class="material-symbols-outlined text-primary text-2xl">inventory</span>
+                                <div>
+                                    <h4 class="text-[11px] font-bold text-slate-900 dark:text-white uppercase mb-1">
+                                        Product
+                                    </h4>
+                                    <ul class="text-[11px] text-slate-500 space-y-1">
+                                        <li>• Top questions by SKU</li>
+                                        <li>• Feature demand</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="space-y-3">
+                                <span class="material-symbols-outlined text-primary text-2xl">monetization_on</span>
+                                <div>
+                                    <h4 class="text-[11px] font-bold text-slate-900 dark:text-white uppercase mb-1">
+                                        Business
+                                    </h4>
+                                    <ul class="text-[11px] text-slate-500 space-y-1">
+                                        <li>• Revenue signals</li>
+                                        <li>• Funnel velocity</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <button
+                            class="bg-primary hover:opacity-90 transition-all text-white px-8 py-3.5 rounded-full font-semibold shadow-lg shadow-blue-900/20 uppercase text-xs tracking-widest mt-4">Connect
+                            CRM</button>
+                    </div>
+                    <div class="flex-1 w-full">
+                        <div class="glass-widget h-[480px] flex flex-col p-8 border-purple-100/30">
+                            <div class="flex justify-between items-center mb-8">
+                                <div>
+                                    <h3 class="font-bold text-slate-800 dark:text-slate-200">Insights Hub</h3>
+                                    <p class="text-[10px] text-slate-400 uppercase font-bold tracking-tighter">Real-time
+                                        Intelligence Feed</p>
+                                </div>
+                                <div
+                                    class="px-3 py-1 bg-white/80 rounded-full border border-slate-100 shadow-sm text-[10px] font-bold text-primary">
+                                    SYNCED TO CRM</div>
+                            </div>
+                            <div class="flex-grow flex flex-col">
+                                <div class="mb-6">
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase mb-3">Revenue Signals (24h)
+                                    </p>
+                                    <div class="h-32 flex items-end gap-1.5">
+                                        <div class="w-full bg-primary/10 h-[40%] rounded-t-sm"></div>
+                                        <div class="w-full bg-primary/20 h-[55%] rounded-t-sm"></div>
+                                        <div class="w-full bg-primary/40 h-[45%] rounded-t-sm"></div>
+                                        <div class="w-full bg-primary h-[85%] rounded-t-sm relative">
+                                            <div
+                                                class="absolute -top-6 left-1/2 -translate-x-1/2 text-[9px] font-bold text-primary">
+                                                $42k</div>
+                                        </div>
+                                        <div class="w-full bg-primary/30 h-[60%] rounded-t-sm"></div>
+                                        <div class="w-full bg-primary/10 h-[30%] rounded-t-sm"></div>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div
+                                        class="bg-white/50 dark:bg-slate-800/50 p-4 rounded-2xl border border-white/50">
+                                        <p class="text-[9px] font-bold text-slate-400 uppercase mb-2">Top Topics</p>
+                                        <div class="flex flex-wrap gap-1.5">
+                                            <span
+                                                class="px-2 py-0.5 bg-primary/5 text-[8px] font-bold text-primary rounded-full">Range</span>
+                                            <span
+                                                class="px-2 py-0.5 bg-primary/5 text-[8px] font-bold text-primary rounded-full">SUV
+                                                vs Sedan</span>
+                                            <span
+                                                class="px-2 py-0.5 bg-primary/5 text-[8px] font-bold text-primary rounded-full">Warranty</span>
+                                            <span
+                                                class="px-2 py-0.5 bg-primary text-[8px] font-bold text-white rounded-full">Financing</span>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="bg-primary p-4 rounded-2xl flex flex-col justify-center items-center text-white">
+                                        <p class="text-[9px] font-bold opacity-70 uppercase mb-1">Lead Score</p>
+                                        <div class="text-3xl font-bold">92<span class="text-sm opacity-50">/100</span>
+                                        </div>
+                                        <p class="text-[8px] mt-1 bg-white/20 px-1.5 py-0.5 rounded-full">High Intent
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+    </div>
+    <main class="pt-12 pb-24 px-6 overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div
+                class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-indigo-50 via-purple-50 to-blue-50 dark:from-indigo-950/20 dark:via-purple-900/10 dark:to-blue-950/20 p-6 md:p-16 lg:p-24">
+                <div class="absolute top-0 right-0 w-1/2 h-full blob-gradient -z-10"></div>
+                <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-accent/5 rounded-full blur-3xl"></div>
+                <div class="grid lg:grid-cols-2 gap-20 items-center">
+                    <div class="space-y-10 relative z-10">
+                        <div class="space-y-6">
+                            <div
+                                class="inline-flex items-center gap-2 bg-white/50 dark:bg-white/10 px-4 py-2 rounded-full border border-white/40 backdrop-blur-sm">
+                                <span class="flex h-2 w-2 rounded-full bg-accent"></span>
+                                <span class="text-xs font-bold uppercase tracking-widest text-accent">Intelligent
+                                    Engine</span>
+                            </div>
+                            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight">
+                                AI that completes <br />
+                                <span class="text-primary italic">the journey.</span>
+                            </h1>
+                            <p class="text-lg text-slate-600 dark:text-slate-400 max-w-lg leading-relaxed">
+                                Merging predictive intelligence and luxury aesthetics to craft exceptional digital
+                                experiences. Our touchless engine automates every step from discovery to checkout.
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6">
+                            <div class="space-y-3">
+                                <div
+                                    class="w-12 h-12 rounded-2xl bg-white dark:bg-white/5 border border-primary/10 flex items-center justify-center shadow-sm">
+                                    <span class="material-symbols-outlined text-primary text-2xl">auto_awesome</span>
+                                </div>
+                                <p class="text-sm font-bold tracking-tight text-slate-800 dark:text-slate-200">
+                                    Nudge</p>
+                            </div>
+                            <div class="space-y-3">
+                                <div
+                                    class="w-12 h-12 rounded-2xl bg-white dark:bg-white/5 border border-primary/10 flex items-center justify-center shadow-sm">
+                                    <span
+                                        class="material-symbols-outlined text-primary text-2xl">record_voice_over</span>
+                                </div>
+                                <p class="text-sm font-bold tracking-tight text-slate-800 dark:text-slate-200">Speak
+                                </p>
+                            </div>
+                            <div class="space-y-3">
+                                <div
+                                    class="w-12 h-12 rounded-2xl bg-white dark:bg-white/5 border border-primary/10 flex items-center justify-center shadow-sm">
+                                    <span class="material-symbols-outlined text-primary text-2xl">rocket_launch</span>
+                                </div>
+                                <p class="text-sm font-bold tracking-tight text-slate-800 dark:text-slate-200">Act
+                                </p>
+                            </div>
+                            <div class="space-y-3">
+                                <div
+                                    class="w-12 h-12 rounded-2xl bg-white dark:bg-white/5 border border-primary/10 flex items-center justify-center shadow-sm">
+                                    <span class="material-symbols-outlined text-primary text-2xl">auto_awesome</span>
+                                </div>
+                                <p class="text-sm font-bold tracking-tight text-slate-800 dark:text-slate-200">Learn
+                                </p>
+                            </div>
+
+                        </div>
+                        <div class="pt-4 flex items-center gap-6">
+                            <div class="flex -space-x-3">
+                                <img alt="User 1"
+                                    class="w-10 h-10 rounded-full border-2 border-white dark:border-slate-800"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCguHJ97_DjfSHA_QrwWCCRhF7MD4W-nfcTbs5LLZWet-TZwlphK1hL9kEQUzWA1lZiqNOT5hqXRCDhks06CMi_pRsbJqLDYIgjn1LdTfGCiOHYF8scP_NmDnaO97jfjDHO2FhKIT5eWgp6Wy4bs9OjdymBNLWimwEAZsQtyL30aifCZbsCMqawmSgeI17ajyFnBI_mhc9u9dhnmtlADOfxWmiU1CSzHSfAUVHJRIIK_OcisoYAlUnw6_xYQWcmf_yCJNFMz58ONA" />
+                                <img alt="User 2"
+                                    class="w-10 h-10 rounded-full border-2 border-white dark:border-slate-800"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbSlTNE9tqBvyfatqbzrYd853foFe5jqWxNu8shoZO4I8LZEcE1-LRRm80geeAs6tBFzrSz3QhXxM0XUbIwFe_yUhW-cS2TfK7UdCSYbJe-TZerlC5e0mP1Zz47ExZwqIrnqYL-Kk_W2KhjyAZeyRDXKMzbXZoqOCCCJ4Q3Tnf7XY2x0AGFgff_gHQkXDTzDFQxGmuivRuH_KcXni1jnUsqpSWCEYJkk9jMWmaflxUACe-rMpehgv2OTAEwNEV9aVlMmYhVzfPJA" />
+                                <img alt="User 3"
+                                    class="w-10 h-10 rounded-full border-2 border-white dark:border-slate-800"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrmgcXmdOxHBEiAud1kq24FHyhW63nfDkdIVT1h_RLROET7zkz7KkHiDSjSH_4ipVtxFsj4LrE5RiKm9KdTI0TD3PlR1ob4g72M_kRe3CHR8oycu55XhP7S8UmoaKWbCe4WYhRVohdlWeGIUWnPrrLMkD79dqHakIu7Y1H2boCVNQCpv60qnpgJVvIVRzRxgpc8XDJ07HIPUVDDpqH-CF6VV7_EKGhykAPqxXFr2Efi71QTQzWZ1CEQLxhQeCEwELxqsdD-4fg2Q" />
+                            </div>
+                            <p class="text-sm font-medium text-slate-500">Trusted by <span
+                                    class="text-slate-900 dark:text-white font-bold">500+ Luxury Brands</span></p>
+                        </div>
+                    </div>
+                    <div class="relative flex justify-center lg:justify-end">
+                        <div
+                            class="relative w-full max-w-[320px] h-auto aspect-[1/2] bg-slate-900 rounded-[3.5rem] p-3 shadow-2xl ring-8 ring-slate-800/10 border-4 border-slate-700/30">
+                            <div
+                                class="w-full h-full bg-slate-950 rounded-[2.8rem] overflow-hidden relative flex flex-col group">
+                                <div
+                                    class="absolute top-0 w-full px-8 pt-6 pb-2 flex justify-between items-center z-20 text-white/70">
+                                    <span class="text-[10px] font-bold">9:41</span>
+                                    <div class="flex gap-1.5 items-center">
+                                        <span class="material-symbols-outlined text-[10px]">signal_cellular_alt</span>
+                                        <span class="material-symbols-outlined text-[10px]">wifi</span>
+                                        <span class="material-symbols-outlined text-[10px]">battery_full</span>
+                                    </div>
+                                </div>
+                                <div class="relative flex-1 bg-black h-100">
+                                    <video src="./assets/productdemo.mp4" autoplay loop muted height="100%"></video>
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-b from-primary/20 via-transparent to-black/80">
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </main>
+    <div class="bg-background-white min-h-screen flex items-center justify-center p-6">
+        <main class="max-w-7xl w-full mx-auto">
+
+            <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+
+                <!-- Image Section -->
+                <div class="relative group overflow-hidden rounded-3xl shadow-2xl h-[500px] lg:h-auto">
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAji63UurG4-Y7GZPKqGOf--u_9UluXw8V2iHkTCi1Uh2MCh61FTi8Iz-NBdASNIvaP0mQnM7l7eWOFU6ZbTmcahLyrVRjEJrmS_9-0JWp8co2njoc4rrDvAbYYQKQcR5zcyoitOx92pAC3g2n3QcgL0SXf_ZjFm8z3X-u5pQ7023bFBVSXrJsPKTsrSv96GlMX3xtetDeJzsw_phOjHCvXwKamz_r8ePI92bMxHXbZHcvJbftG36W7bv-jzeh6xFsoXcgC5UHa5A"
+                        alt="Luxury car interior with advanced AI interface"
+                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent">
+                    </div>
+
+                    <div class="absolute bottom-8 left-8 glass-effect px-4 py-3 rounded-2xl flex items-center gap-3">
+                        <div class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></div>
+                        <span class="text-white text-sm font-medium tracking-wide">
+                            AI Interface Active
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Content Section -->
+                <div
+                    class="bg-card-light p-8 md:p-12 lg:p-16 rounded-3xl shadow-xl border border-gray-100 flex flex-col justify-center">
+
+                    <!-- Header -->
+                    <div class="mb-8">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="h-px w-12 bg-primary"></div>
+                            <span class="text-primary font-semibold text-sm tracking-wide">
+                                Featured case study
+                            </span>
+                        </div>
+
+                        <h2
+                            class="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 leading-tight mb-6 tracking-tight">
+                            How Swirl built the worlds first
+                            <br />
+                            <span class="text-primary"> BYD AI Advisor</span>
+                        </h2>
+
+                        <p class="text-xl text-slate-700 leading-relaxed max-w-xl font-medium">
+                            “The Swirl advisor turned our BYD model pages into a real conversation.
+                            Instead of hoping visitors understand EVs, we now see what they actually
+                            care about — and move them to test-drives faster, without replatforming anything.”
+                        </p>
+
+                        <div class="mt-6">
+                            <p class="text-base font-semibold text-slate-900">
+                                Himanshu Shrivastava
+                            </p>
+                            <p class="text-sm text-slate-500">
+                                CTO / CIO / CDO, Al-Futtaim
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <!-- Metrics -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+
+                        <div
+                            class="glass-effect p-6 rounded-2xl border border-gray-100 hover:-translate-y-1 hover:shadow-lg transition">
+                            <p class="text-xs font-medium tracking-wide text-slate-500 mb-2">
+                                Engagement
+                            </p>
+                            <p class="text-3xl font-bold text-primary mb-2">+27%</p>
+                        </div>
+
+                        <div
+                            class="glass-effect p-6 rounded-2xl border border-gray-100 hover:-translate-y-1 hover:shadow-lg transition">
+                            <p class="text-xs font-medium tracking-wide text-slate-500 mb-2">
+                                Time On Site
+                            </p>
+                            <p class="text-3xl font-bold text-primary mb-2">+75%</p>
+                        </div>
+
+                        <div
+                            class="glass-effect p-6 rounded-2xl border border-gray-100 hover:-translate-y-1 hover:shadow-lg transition">
+                            <p class="text-xs font-medium tracking-wide text-slate-500 mb-2">
+                                Sales lift in &lt; 4 months
+                            </p>
+                            <p class="text-3xl font-bold text-primary mb-2">$10M+</p>
+                        </div>
+
+                        <div
+                            class="glass-effect p-6 rounded-2xl border border-gray-100 hover:-translate-y-1 hover:shadow-lg transition">
+                            <p class="text-xs font-medium tracking-wide text-slate-500 mb-2">
+                                MoM AI sessions
+                            </p>
+                            <p class="text-3xl font-bold text-primary mb-2">2.5x</p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Footer Note -->
+                    <div class="pt-8 border-t border-gray-100">
+                        <p class="text-sm italic text-slate-400">
+                            Deployed on existing product pages. No replatforming required.
+                        </p>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <div
+        class="mesh-gradient min-h-screen text-slate-900 dark:text-slate-100 font-sans antialiased transition-colors duration-300">
+        <main class="max-w-7xl mx-auto px-6 py-20 lg:py-32">
+            <header class="text-center mb-20 space-y-4">
+                <h2
+                    class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 dark:text-white leading-tight">
+                    Why teams choose <span class="text-primary dark:text-blue-400">Swirl</span>
+                    <div class="h-1.5 w-16 bg-primary dark:bg-blue-500 mx-auto mt-4 rounded-full"></div>
+                </h2>
+                <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-medium leading-relaxed">
+                    The intelligence layer that turns conversations into completed journeys.
+                </p>
+            </header>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-32">
+
+                <div class="glass-card p-6 md:p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm mb-6">
+                        <span class="material-icons-outlined text-primary text-3xl">attach_money</span>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-semibold mb-3 text-slate-900">Purpose-built for
+                        high-consideration B2C</h3>
+                    <p class="text-sm md:text-base text-slate-600 leading-relaxed font-medium">
+                        Automotive, electronics, appliances, real estate & more
+                    </p>
+                </div>
+
+                <div class="glass-card p-6 md:p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm mb-6">
+                        <span class="material-icons-outlined text-primary text-3xl">auto_awesome</span>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-semibold mb-3 text-slate-900">Co-creation, not black box</h3>
+                    <p class="text-sm md:text-base text-slate-600 leading-relaxed font-medium">
+                        Your team can see and shape how the agent sells
+                    </p>
+                </div>
+
+                <div class="glass-card p-6 md:p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm mb-6">
+                        <span class="material-icons-outlined text-primary text-3xl">done</span>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-semibold mb-3 text-slate-900">Enterprise-ready</h3>
+                    <p class="text-sm md:text-base text-slate-600 leading-relaxed font-medium">
+                        Guardrails, observability, Salesforce / SAP C4C / data integrations
+                    </p>
+                </div>
+
+                <div class="glass-card p-6 md:p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm mb-6">
+                        <span class="material-icons-outlined text-primary text-3xl">access_time</span>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-semibold mb-3 text-slate-900">Fast time to value</h3>
+                    <p class="text-sm md:text-base text-slate-600 leading-relaxed font-medium">
+                        Go live in 2 weeks, not quarters
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="relative">
+                <div class="absolute inset-0 bg-primary/20 blur-[80px] rounded-2xl -z-10"></div>
+                <div class="bg-primary text-white rounded-[2rem] p-12 lg:p-20 text-center overflow-hidden relative">
+                    <div class="absolute inset-0 opacity-10 pointer-events-none">
+                        <svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100">
+                            <defs>
+                                <pattern height="10" id="grid" patternUnits="userSpaceOnUse" width="10">
+                                    <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5">
+                                    </path>
+                                </pattern>
+                            </defs>
+                            <rect fill="url(#grid)" height="100%" width="100%"></rect>
+                        </svg>
+                    </div>
+                    <div class="relative z-10 max-w-3xl mx-auto space-y-8">
+                        <h2 class="text-4xl md:text-5xl font-bold leading-tight">
+                            Your AI-powered buying journey starts here
+                        </h2>
+                        <p class="text-blue-100 text-lg leading-relaxed">
+                            Move buyers from first question to conversion in one autonomous AI-led
+                            experience—without
+                            rebuilding your stack.
+                        </p>
+                        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                            <a class="w-full sm:w-auto px-8 py-3.5 bg-white text-primary text-base font-semibold rounded-lg hover:bg-blue-50 transition-colors shadow-lg"
+                                href="#">
+                                Get a free demo
+                            </a>
+                            <a class="w-full sm:w-auto px-8 py-3.5 border border-white/30 text-white text-base font-semibold rounded-lg hover:bg-white/10 transition-colors backdrop-blur-sm"
+                                href="#">
+                                Contact sales
+                            </a>
+                        </div>
+                        <div class="pt-8 flex flex-col items-center gap-4">
+                            <div class="flex -space-x-3">
+                                <img alt="User 1"
+                                    class="w-10 h-10 rounded-full border-2 border-primary bg-slate-200 object-cover"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDs_tmjEW1Zl-0Rry1d8IRTX4gGZk0tqnZa421GxvufHcIz_UI1TcViT7xvFpH4auFfflK6g58BJhB92eaYF8hFPexFiV4SobgcuGv9rsdc2DbfNL4Aug9qDRTZN1XsJgvQCmipawgHGWByiqQmJpKDa_np4sfeeJRBm8uAe3eF81jn4vfF0jZxMhXVxhBCQ7ulv20vIEJe_fal5QCFQIoa5QB0cezZsYJsXoorKTffvl3OrWb-ddtdEfX2cARht-A3gK2Pslzzlg" />
+                                <img alt="User 2"
+                                    class="w-10 h-10 rounded-full border-2 border-primary bg-slate-200 object-cover"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBc_aV0tE_vkq5RSOC9bK0_kHni8N8UpMjj6lsL-9YbaeMVlvH_dARlPdwvdgzdH7UgLAgZbaFTZ2wB5C7Md9aLspQNVwJFOmrsIYUzF2OEpvD5OZobgbF4_tjeY3L7anjdnriVS3V3sMjZVo5os1p2iQzMSMfeBM_8iuQk0WkNvOc-3RkGHgSWQSbjvSfD1pj4wkwWpmy9BQFEL-tFiGdQ44y4Hvc-nDXkcYSav2drfPl1z829UdP35uIrq0EBZpwHfl5QYcA1Yg" />
+                                <img alt="User 3"
+                                    class="w-10 h-10 rounded-full border-2 border-primary bg-slate-200 object-cover"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCi1XuOfHlU-kHaWVk1O1muo4S-D5QgFxsnL6CjTdIZ9jthgPjO8jYejZYkxvOBXlZP41iuTodU8iX4HNSYqARh4x1XIeLv_GTK4EF9jXAjFICU3Gw7dxceNezmzuso0Q7IHJEfEBza3vwZvdsDp9kYL_AKBGtVnJrXLyOF3HYY3EpQWi5PAR6cass6m2pjtFTUZbG5aP1QaOtn9nx_k_3zAQjg0xxJ_oEDW884aG_tl-0_7mfDNsmzZT_76GmA9BqSNrJpktEUaQ" />
+                                <div
+                                    class="w-10 h-10 rounded-full border-2 border-primary bg-blue-600 flex items-center justify-center text-xs font-bold">
+                                    +12k
+                                </div>
+                            </div>
+                            <p class="text-blue-200 text-sm">
+                                Trusted by leading global brands to power high-consideration buying journeys
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+
+    </div>
+    <footer
+        class="bg-slate-50 dark:bg-background-dark py-16 px-10 border-t border-slate-200 dark:border-slate-800 relative z-[100]">
+        <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+            <div class="space-y-6">
+                <div class="flex items-center gap-3 text-primary dark:text-white">
+                    <div class="size-6">
+                        <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path clip-rule="evenodd"
+                                d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z"
+                                fill="currentColor" fill-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <span class="font-bold text-lg tracking-tight uppercase font-display">SWIRL AI</span>
+                </div>
+                <p class="text-sm text-slate-500 max-w-xs leading-relaxed font-medium">
+                    The intelligence layer for global luxury commerce. Empowering heritage houses with future-proof
+                    AI.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 w-full md:w-auto">
+                <div class="space-y-4">
+                    <p class="text-xs font-semibold tracking-wide text-slate-900 dark:text-white">Platform
+                    </p>
+                    <nav class="flex flex-col gap-2 text-sm text-slate-500">
+                        <a class="hover:text-primary" href="#">Engine</a>
+                        <a class="hover:text-primary" href="#">Neural Sync</a>
+                        <a class="hover:text-primary" href="#">Terminal</a>
+                    </nav>
+                </div>
+                <div class="space-y-4">
+                    <p class="text-xs font-semibold tracking-wide text-slate-900 dark:text-white">Company
+                    </p>
+                    <nav class="flex flex-col gap-2 text-sm text-slate-500">
+                        <a class="hover:text-primary" href="about.html">About</a>
+                        <a class="hover:text-primary" href="contact.html">Contact</a>
+                    </nav>
+                </div>
+                <div class="space-y-4">
+                    <p class="text-xs font-semibold tracking-wide text-slate-900 dark:text-white">Legal</p>
+                    <nav class="flex flex-col gap-2 text-sm text-slate-500">
+                        <a class="hover:text-primary" href="privacy.html">Privacy</a>
+
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-[1200px] mx-auto mt-16 pt-8 border-t border-slate-200 dark:border-slate-800 text-center">
+            <p class="text-xs text-slate-400 font-medium tracking-wide">© 2024 Swirl AI Platforms. All rights
+                reserved.
+            </p>
+        </div>
+    </footer>
+</body>
+
+</html>

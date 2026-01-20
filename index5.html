@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Neural Network Data-Viz Hero | SWIRL AI</title>
+    <!-- Google Fonts: Space Grotesk & Playfair Display for 'Luxury' -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Playfair+Display:ital,wght@1,600&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "ocean-blue": "#0a3d62",
+                        "luxury-gold": "#d4af37",
+                        "background-light": "#f0f7ff",
+                        "background-dark": "#0a192f",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "luxury": ["Playfair Display", "serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .luxury-script {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at top right, #e0f2fe, #f0f7ff, #ffffff);
+        }
+
+        .neural-line {
+            stroke: #d4af37;
+            stroke-width: 0.5;
+            opacity: 0.3;
+        }
+
+        .pulse-navy {
+            box-shadow: 0 0 0 0 rgba(10, 61, 98, 0.4);
+            animation: pulse-navy 2s infinite;
+        }
+
+
+
+        .neural-glow {
+            background: radial-gradient(circle, rgba(0, 2, 129, 0.4) 0%, rgba(0, 2, 129, 0) 70%);
+        }
+
+        .neural-core-mesh {
+            background-image: radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        @keyframes pulse-navy {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(10, 61, 98, 0.7);
+            }
+
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 10px rgba(10, 61, 98, 0);
+            }
+
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(10, 61, 98, 0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div
+        class="bg-background-light dark:bg-background-dark font-display text-ocean-blue selection:bg-primary selection:text-white">
+        <div class="relative min-h-screen flex flex-col hero-gradient">
+            <!-- Header / Navigation -->
+            <header class="w-full px-8 lg:px-20 py-6 flex items-center justify-between z-50">
+                <div class="flex items-center gap-2">
+                    <div class="size-8 bg-ocean-blue rounded-lg flex items-center justify-center text-white">
+                        <span class="material-symbols-outlined text-xl">bubble_chart</span>
+                    </div>
+                    <h2 class="text-ocean-blue text-2xl font-bold tracking-tighter">SWIRL</h2>
+                </div>
+                <nav class="hidden md:flex items-center gap-10">
+                    <a class="text-ocean-blue/70 hover:text-ocean-blue text-sm font-semibold transition-colors"
+                        href="#">Solutions</a>
+                    <a class="text-ocean-blue/70 hover:text-ocean-blue text-sm font-semibold transition-colors"
+                        href="#">Technology</a>
+                    <a class="text-ocean-blue/70 hover:text-ocean-blue text-sm font-semibold transition-colors"
+                        href="#">Intelligence</a>
+                </nav>
+                <div class="flex items-center gap-4">
+                    <button
+                        class="flex items-center justify-center rounded-full h-11 px-6 bg-ocean-blue text-white text-sm font-bold tracking-wide hover:bg-primary transition-all shadow-lg shadow-ocean-blue/10">
+                        Launch App
+                    </button>
+                </div>
+            </header>
+            <!-- Main Hero Content -->
+            <main
+                class="relative flex-1 flex flex-col lg:flex-row items-center justify-center px-8 lg:px-20 py-12 gap-12 overflow-hidden">
+                <!-- Background Decorative Neural Elements (Abstract) -->
+                <div class="absolute inset-0 z-0 pointer-events-none opacity-40">
+                    <svg class="w-full h-full" fill="none" viewbox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="600" cy="200" fill="#0a3d62" r="4"></circle>
+                        <circle cx="700" cy="350" fill="#0a3d62" r="3"></circle>
+                        <circle cx="550" cy="450" fill="#d4af37" r="5"></circle>
+                        <circle cx="450" cy="150" fill="#0a3d62" r="3"></circle>
+                        <path d="M600 200L700 350M700 350L550 450M550 450L600 200M600 200L450 150M450 150L700 350"
+                            stroke="#d4af37" stroke-dasharray="4 4" stroke-width="0.5"></path>
+                    </svg>
+                </div>
+                <!-- Left: Typography & CTA -->
+                <div class="flex-1 flex flex-col gap-8 z-10 max-w-2xl">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full border border-primary/20 w-fit">
+                        <span class="relative flex h-2 w-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                        </span>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-primary">Neural Network v4.2
+                            Live</span>
+                    </div>
+                    <h1 class="text-ocean-blue text-5xl lg:text-7xl font-bold leading-[1.1] tracking-tight">
+                        THE VOICE OF <br />
+                        <span class="luxury-script text-luxury-gold">Luxury</span> COMMERCE
+                    </h1>
+                    <p class="text-ocean-blue/70 text-lg lg:text-xl max-w-md leading-relaxed font-light">
+                        Transforming high-end retail through the power of sophisticated neural voice synthesis and
+                        real-time
+                        intelligence.
+                    </p>
+                    <div class="flex flex-wrap gap-4 mt-4">
+                        <button
+                            class="group flex items-center gap-2 min-w-[180px] justify-center rounded-xl h-14 bg-ocean-blue text-white font-bold hover:bg-primary hover:scale-[1.02] transition-all shadow-xl shadow-ocean-blue/20">
+                            <span>Explore the Network</span>
+                            <span
+                                class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </button>
+                        <button
+                            class="flex items-center gap-2 min-w-[150px] justify-center rounded-xl h-14 bg-white/60 border border-ocean-blue/10 text-ocean-blue font-bold backdrop-blur-md hover:bg-white transition-all">
+                            <span class="material-symbols-outlined">play_circle</span>
+                            <span>Watch Demo</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Right: Interactive Data Visualization -->
+                <div class="flex-1 relative w-full aspect-square max-w-[500px] z-10">
+                    <!-- Main Neural Visualization Wrapper -->
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div
+                            class="relative w-full h-full rounded-full bg-gradient-to-tr from-primary/5 to-luxury-gold/5 border border-white/50 backdrop-blur-3xl flex items-center justify-center shadow-inner overflow-hidden">
+                            <!-- Abstract Data Cloud Centerpiece -->
+                            <div class="w-4/5 h-4/5 bg-center bg-no-repeat bg-contain"
+                                data-alt="3D neural network cloud with navy nodes and gold connections"
+                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB_-ZBOPgw-_mV1v8M8W_VO4lX2tb-_vG9JwDWfGJE4WZXS-WK_IhMtFErjskBobtwxatgZfx90ATroF2S1CxKNfaSINEZUixHWAuny8Tut3CICwcjYMjAs1SaPUcojCejR2glA7Icf4DWdRUMQ8Mk6tGc7vTbE1UHf9p0oScOT43gNvfwKyxpOHCLN8PaSxTUCQPouX5Ts9Jcxd6H5IMoWo2kXs1HyqHjk2ubV5GIwS6XQeHmxVwbDXbEcP5cxguYXd8W5rjWXSA');">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Floating Card: Agent Active -->
+                    <div class="absolute -top-4 -left-8 animate-bounce transition-all duration-1000">
+                        <div
+                            class="flex items-center gap-4 rounded-xl bg-white/80 backdrop-blur-xl p-4 shadow-2xl border border-white">
+                            <div class="flex flex-col gap-0.5 min-w-[120px]">
+                                <p class="text-ocean-blue/50 text-[10px] font-bold uppercase tracking-tighter">System
+                                    Status
+                                </p>
+                                <p class="text-ocean-blue text-sm font-bold">AGENT ACTIVE</p>
+                                <div class="flex items-end gap-0.5 h-4 mt-1">
+                                    <div class="w-1 bg-primary/40 h-2 rounded-full"></div>
+                                    <div class="w-1 bg-primary/60 h-4 rounded-full"></div>
+                                    <div class="w-1 bg-primary/80 h-3 rounded-full"></div>
+                                    <div class="w-1 bg-primary h-2 rounded-full"></div>
+                                    <div class="w-1 bg-primary/50 h-3 rounded-full"></div>
+                                </div>
+                            </div>
+                            <div
+                                class="size-10 rounded-full bg-ocean-blue pulse-navy flex items-center justify-center text-white">
+                                <span class="material-symbols-outlined text-lg">mic</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Floating Metric: Accuracy -->
+                    <div class="absolute bottom-12 -right-4">
+                        <div
+                            class="rounded-xl bg-luxury-gold/10 backdrop-blur-xl p-4 border border-luxury-gold/20 shadow-xl">
+                            <p class="text-luxury-gold text-xs font-bold uppercase">Confidence</p>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-2xl font-bold text-ocean-blue">99.8</span>
+                                <span class="text-ocean-blue/60 font-medium">%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <!-- Bottom Metrics: Circular Containers -->
+            <section class="w-full px-8 lg:px-20 py-10 z-10">
+                <div
+                    class="flex flex-wrap justify-center lg:justify-between items-center gap-8 border-t border-ocean-blue/5 pt-10">
+                    <!-- Accuracy Metric -->
+                    <div class="flex items-center gap-4 group">
+                        <div
+                            class="size-16 rounded-full border-2 border-ocean-blue/10 flex items-center justify-center group-hover:border-primary transition-colors">
+                            <span
+                                class="material-symbols-outlined text-ocean-blue group-hover:text-primary">verified</span>
+                        </div>
+                        <div>
+                            <p class="text-ocean-blue text-2xl font-bold">99.2%</p>
+                            <p class="text-ocean-blue/50 text-xs font-bold uppercase tracking-widest">Transcription
+                                Accuracy
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Latency Metric -->
+                    <div class="flex items-center gap-4 group">
+                        <div
+                            class="size-16 rounded-full border-2 border-ocean-blue/10 flex items-center justify-center group-hover:border-primary transition-colors">
+                            <span class="material-symbols-outlined text-ocean-blue group-hover:text-primary">bolt</span>
+                        </div>
+                        <div>
+                            <p class="text-ocean-blue text-2xl font-bold">0.4s</p>
+                            <p class="text-ocean-blue/50 text-xs font-bold uppercase tracking-widest">Global Latency</p>
+                        </div>
+                    </div>
+                    <!-- Concierge Metric -->
+                    <div class="flex items-center gap-4 group">
+                        <div
+                            class="size-16 rounded-full border-2 border-ocean-blue/10 flex items-center justify-center group-hover:border-primary transition-colors">
+                            <span
+                                class="material-symbols-outlined text-ocean-blue group-hover:text-primary">support_agent</span>
+                        </div>
+                        <div>
+                            <p class="text-ocean-blue text-2xl font-bold">24/7</p>
+                            <p class="text-ocean-blue/50 text-xs font-bold uppercase tracking-widest">Neural Concierge
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Conversion Metric -->
+                    <div class="flex items-center gap-4 group">
+                        <div
+                            class="size-16 rounded-full border-2 border-ocean-blue/10 flex items-center justify-center group-hover:border-primary transition-colors">
+                            <span
+                                class="material-symbols-outlined text-ocean-blue group-hover:text-primary">trending_up</span>
+                        </div>
+                        <div>
+                            <p class="text-ocean-blue text-2xl font-bold">+100%</p>
+                            <p class="text-ocean-blue/50 text-xs font-bold uppercase tracking-widest">Avg Conversion
+                                Lift
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- Footer -->
+
+        </div>
+    </div>
+    <main class="pt-32 pb-20 overflow-hidden">
+        <section class="max-w-7xl mx-auto px-8 mb-20">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
+                <div>
+                    <span
+                        class="inline-block text-primary dark:text-accent font-mono text-xs tracking-widest uppercase mb-4 font-bold">
+                        The Standard of Excellence
+                    </span>
+                    <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight leading-tight">
+                        The Intelligence <br />
+                        <span class="text-primary dark:text-white opacity-90">Behind the Interface</span>
+                    </h1>
+                </div>
+                <div class="max-w-md lg:pb-4">
+                    <p class="text-lg text-slate-500 dark:text-slate-400 leading-relaxed">
+                        Intelligence that understands buyer intent, guides high-consideration decisions, and
+                        converts
+                        with precision and restraint.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <div
+            class="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 h-screen pointer-events-none z-0 opacity-40 dark:opacity-60 overflow-hidden">
+            <div class="relative w-full h-full flex items-center justify-center">
+                <div class="absolute w-[600px] h-[600px] neural-glow rounded-full animate-pulse-slow"></div>
+                <div
+                    class="relative w-96 h-96 rounded-full bg-primary/20 backdrop-blur-3xl border border-primary/30 flex items-center justify-center animate-float overflow-hidden">
+                    <div class="absolute inset-0 neural-core-mesh animate-spin-slow"></div>
+                    <div class="w-32 h-32 bg-primary rounded-full blur-3xl animate-pulse opacity-80"></div>
+                    <div
+                        class="relative w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-[0_0_50px_rgba(255,255,255,0.4)]">
+                        <span class="material-symbols-outlined text-primary text-4xl animate-spin-slow">hub</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="relative z-10">
+            <div
+                class="flex overflow-x-auto hide-scrollbar snap-x snap-mandatory px-8 lg:px-[calc((100vw-1280px)/2)] gap-8 py-10">
+                <div class="flex-none w-[85vw] md:w-[600px] snap-center">
+                    <div
+                        class="group bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-10 rounded-3xl h-[500px] flex flex-col justify-between hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
+                        <div>
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-primary/5 dark:bg-primary/20 flex items-center justify-center mb-10 group-hover:scale-110 transition-transform">
+                                <span
+                                    class="material-symbols-outlined text-primary dark:text-accent text-3xl">psychology</span>
+                            </div>
+                            <h3 class="text-3xl font-bold mb-6">Context Awareness</h3>
+                            <p class="text-lg text-slate-500 dark:text-slate-400 leading-relaxed">
+                                Anticipates buyer intent from behavior, history, and real-time signals—adjusting
+                                tone,
+                                pace, and guidance to move decisions forward with confidence.
+                            </p>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <div class="space-y-1">
+                                <p class="text-[10px] font-mono uppercase tracking-widest text-slate-400">Response
+                                    Accuracy</p>
+                                <p class="text-4xl font-mono font-bold text-primary dark:text-white">99.8%</p>
+                            </div>
+                            <div
+                                class="w-12 h-12 rounded-full border border-slate-200 dark:border-slate-800 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-none w-[85vw] md:w-[600px] snap-center">
+                    <div
+                        class="group bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-10 rounded-3xl h-[500px] flex flex-col justify-between hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
+                        <div>
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-primary/5 dark:bg-primary/20 flex items-center justify-center mb-10 group-hover:scale-110 transition-transform">
+                                <span
+                                    class="material-symbols-outlined text-primary dark:text-accent text-3xl">chat_bubble</span>
+                            </div>
+                            <h3 class="text-3xl font-bold mb-6">Natural Interaction</h3>
+                            <p class="text-lg text-slate-500 dark:text-slate-400 leading-relaxed">
+                                Buyers converse naturally by voice or text—asking real questions, exploring
+                                trade-offs,
+                                and progressing without friction or forms.
+                            </p>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <div class="space-y-1">
+                                <p class="text-[10px] font-mono uppercase tracking-widest text-slate-400">
+                                    Interaction
+                                    Latency</p>
+                                <p class="text-4xl font-mono font-bold text-primary dark:text-white">120ms</p>
+                            </div>
+                            <div
+                                class="w-12 h-12 rounded-full border border-slate-200 dark:border-slate-800 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-none w-[85vw] md:w-[600px] snap-center">
+                    <div
+                        class="group bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-10 rounded-3xl h-[500px] flex flex-col justify-between hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
+                        <div>
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-primary/5 dark:bg-primary/20 flex items-center justify-center mb-10 group-hover:scale-110 transition-transform">
+                                <span
+                                    class="material-symbols-outlined text-primary dark:text-accent text-3xl">verified</span>
+                            </div>
+                            <h3 class="text-3xl font-bold mb-6">Brand Alignment</h3>
+                            <p class="text-lg text-slate-500 dark:text-slate-400 leading-relaxed">
+                                Every response reflects your brand’s voice, tone, and guardrails—ensuring AI sells
+                                the
+                                way your best teams do.
+                            </p>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <div class="space-y-1">
+                                <p class="text-[10px] font-mono uppercase tracking-widest text-slate-400">Tone
+                                    Consistency</p>
+                                <p class="text-4xl font-mono font-bold text-primary dark:text-white">99%</p>
+                            </div>
+                            <div
+                                class="w-12 h-12 rounded-full border border-slate-200 dark:border-slate-800 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-none w-[85vw] md:w-[600px] snap-center">
+                    <div
+                        class="group bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-10 rounded-3xl h-[500px] flex flex-col justify-between hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
+                        <div>
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-primary/5 dark:bg-primary/20 flex items-center justify-center mb-10 group-hover:scale-110 transition-transform">
+                                <span
+                                    class="material-symbols-outlined text-primary dark:text-accent text-3xl">language</span>
+                            </div>
+                            <h3 class="text-3xl font-bold mb-6">Global Scalability</h3>
+                            <p class="text-lg text-slate-500 dark:text-slate-400 leading-relaxed">
+                                Deliver elite-level customer experiences in 100+ languages simultaneously without
+                                losing
+                                nuances or cultural relevance.
+                            </p>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <div class="space-y-1">
+                                <p class="text-[10px] font-mono uppercase tracking-widest text-slate-400">Languages
+                                    Supported</p>
+                                <p class="text-4xl font-mono font-bold text-primary dark:text-white">100+</p>
+                            </div>
+                            <div
+                                class="w-12 h-12 rounded-full border border-slate-200 dark:border-slate-800 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="max-w-7xl mx-auto px-8 mt-12 flex items-center gap-4">
+                <div class="h-[2px] w-32 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+                    <div class="h-full bg-primary w-1/4 transition-all duration-300" id="scroll-progress"></div>
+                </div>
+                <span class="text-xs font-mono text-slate-400 uppercase tracking-widest">Scroll to explore</span>
+            </div>
+        </section>
+    </main>
+    <footer
+        class="mt-auto px-8 lg:px-20 py-8 flex flex-col md:flex-row justify-between items-center gap-6 border-t border-ocean-blue/5 bg-white/50 backdrop-blur-sm z-10">
+        <p class="text-ocean-blue/50 text-sm">© 2024 SWIRL AI Voice Commerce. All rights reserved.</p>
+        <div class="flex items-center gap-8">
+            <a class="text-ocean-blue/50 hover:text-ocean-blue text-sm" href="#">Privacy Policy</a>
+            <a class="text-ocean-blue/50 hover:text-ocean-blue text-sm" href="#">Terms of Service</a>
+            <a class="text-ocean-blue/50 hover:text-ocean-blue text-sm" href="#">Contact</a>
+        </div>
+        <div class="flex items-center gap-4">
+            <a class="size-8 rounded-lg bg-ocean-blue/5 flex items-center justify-center text-ocean-blue hover:bg-ocean-blue hover:text-white transition-all"
+                href="#">
+                <span class="material-symbols-outlined text-lg">share</span>
+            </a>
+            <a class="size-8 rounded-lg bg-ocean-blue/5 flex items-center justify-center text-ocean-blue hover:bg-ocean-blue hover:text-white transition-all"
+                href="#">
+                <span class="material-symbols-outlined text-lg">public</span>
+            </a>
+        </div>
+    </footer>
+</body>
+
+
+</html>

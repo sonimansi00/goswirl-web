@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Swirl - Voice AI Agent Platform</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        /* Brand */
+                        primary: "#000281",
+                        "brand-navy": "#000281",
+
+                        /* Text */
+                        "brand-gray": "#1d1d1f",
+
+                        /* Backgrounds */
+                        "background-light": "#f5f5f8",
+                        "background-dark": "#0f0f23",
+                        "off-white": "#F8F9FA",
+                        "light-grey": "#F1F3F5",
+                        "gray-light": "#f5f5f7",
+
+                        /* UI */
+                        "card-border": "#E9ECEF",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "Plus Jakarta Sans", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "2rem",
+                        full: "9999px",
+                    },
+                },
+            },
+        };
+    </script>
+
+    <style type="text/tailwindcss">
+
+        .sound-wave-container {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                height: 120px;
+            }
+            .wave-bar {
+                width: 4px;
+                background: linear-gradient(to top, #000281, #2563eb, #00f2ff);
+                border-radius: 99px;
+            }
+            .glass-card {
+                background: rgba(255, 255, 255, 0.7);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border: 1px solid rgba(0, 0, 0, 0.05);
+            }
+            .hero-glow {
+                background: radial-gradient(circle at 70% 30%, rgba(0, 2, 129, 0.03) 0%, transparent 60%);
+            }
+                   .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .timeline-gradient {
+            background: linear-gradient(180deg, #dadae7 0%, #000280 100%);
+        }
+                .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .text-navy {
+            color: #000281;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .methodology-line {
+            background: linear-gradient(180deg, #000281 0%, rgba(0, 2, 129, 0.05) 100%);
+        }
+        .pulse-container {
+            position: relative;
+        }
+        .pulse-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background-color: rgba(0, 2, 129, 0.08);
+            border-radius: 50%;
+            z-index: -1;
+        }
+          .lens-mask {
+            mask-image: radial-gradient(circle 250px at center, black 100%, transparent 100%);
+            -webkit-mask-image: radial-gradient(circle 250px at center, black 100%, transparent 100%);
+        }
+
+        .blur-text {
+            filter: blur(2px);
+            opacity: 0.4;
+        }
+         body {
+            font-family: "Space Grotesk", sans-serif;
+        }
+        .hologram-glow-light {
+            box-shadow: 0 8px 32px 0 rgba(0, 2, 129, 0.08);
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.4);
+        }
+        .scanline-light {
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 2, 128, 0.02) 51%);
+            background-size: 100% 4px;
+        }
+        .bg-slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    animation: fadeBg 18s infinite, slowZoom 18s infinite;
+}
+
+/* stagger each slide */
+.bg-1 { 
+    background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCUGVFPXWU1Er_7L7u46ibUR_DAuPEr79ilQg8lT-K8zWXfW4VuwhFKA3_1qvpK7zPwPYW-JVTXPknQVf7fLw2aUCr6zw4NdfTYv5bjX1dC-ilbw7bKT-FSEpFIJzp6e1QdugKU8gyKfyE-yzBUV2ZZeUM0_YNcAPQIbtU9wdfNe05EiNkdeG6QniLUcmhSqZqO-p1izrBnvTYNqb0eUeeQBrhxr6wAXs6njb7onNNHUDElZG7779TY7T8nKV575N6c9IbjZWZW0Cg");
+    animation-delay: 0s;
+}
+.bg-2 { 
+    background-image: url("https://images.pexels.com/photos/9783353/pexels-photo-9783353.jpeg?_gl=1*vwskj3*_ga*NTUxMjk3MTUuMTc2ODMwMTg3OA..*_ga_8JE65Q40S6*czE3NjgzMDE4NzgkbzEkZzEkdDE3NjgzMDE5MzAkajgkbDAkaDA.");
+    animation-delay: 6s;
+}
+.bg-3 { 
+    background-image: url("https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1600&q=80");
+    animation-delay: 12s;
+}
+
+@keyframes fadeBg {
+    0% { opacity: 1 }
+    10% { opacity: 1 }
+    30% { opacity: 1 }
+    40% { opacity: 1 }
+    100% { opacity: 1}
+}
+
+@keyframes slowZoom {
+    from { transform: scale(1.05); }
+    to { transform: scale(1.1); }
+}
+  .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .leader-line {
+            stroke: #000280;
+            stroke-width: 0.5;
+            opacity: 0.3;
+        }
+
+        .circle-path {
+            stroke: #000280;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .glow-effect {
+            filter: drop-shadow(0 0 8px rgba(0, 2, 128, 0.3));
+        }
+        .marquee {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 6rem;
+  width: max-content;
+  animation: marquee-scroll 40s linear infinite;
+}
+
+.marquee-track img {
+  height: 2.25rem;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.4;
+  transition: all 0.4s ease;
+}
+
+.marquee:hover img {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+ .glass-orb {
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4), rgba(13, 17, 242, 0.2));
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 80px rgba(13, 17, 242, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .leader-line {
+            stroke: #0d11f2;
+            stroke-width: 0.5px;
+            fill: none;
+            opacity: 0.3;
+        }
+
+        .node-point {
+            width: 8px;
+            height: 8px;
+            background: #0d11f2;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #0d11f2;
+        }
+         .ultra-thin-divider {
+            width: 0.5px;
+            background-color: #000281;
+        }
+
+        .text-justify-custom {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .glow-overlay {
+            box-shadow: 0 0 30px 10px rgba(0, 0, 128, 0.2);
+        }
+    </style>
+</head>
+
+<body class="font-display bg-white text-brand-gray antialiased overflow-x-hidden">
+    <nav class="fixed w-full z-50 top-0 bg-white/80 backdrop-blur-xl border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+
+            <!-- Logo -->
+            <div class="flex items-center gap-2">
+                <span class="text-xl font-bold tracking-tight text-brand-navy">SWIRL</span>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center gap-10 text-[13px] font-semibold text-gray-500">
+
+                <a href="#platform" class="hover:text-brand-navy transition-colors">
+                    Platform
+                </a>
+
+                <a href="#use-cases" class="hover:text-brand-navy transition-colors">
+                    Use Cases
+                </a>
+
+                <a href="#why-swirl" class="hover:text-brand-navy transition-colors">
+                    Why Swirl
+                </a>
+
+                <a href="#resources" class="hover:text-brand-navy transition-colors">
+                    Resources
+                </a>
+            </div>
+
+            <!-- CTAs -->
+            <div class="flex items-center gap-4 md:gap-6">
+                <a href="#demo"
+                    class="hidden md:inline-flex bg-brand-navy hover:bg-brand-navy/90 text-white text-[13px] font-bold px-5 py-2 rounded-full transition-all">
+                    Request a Demo
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')"
+                    class="md:hidden text-brand-navy p-2">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-white border-b border-gray-100 p-6 flex flex-col gap-4 shadow-xl">
+
+            <a href="#platform" class="text-sm font-semibold text-gray-600 hover:text-brand-navy">
+                Platform
+            </a>
+
+            <a href="#use-cases" class="text-sm font-semibold text-gray-600 hover:text-brand-navy">
+                Use Cases
+            </a>
+
+            <a href="#why-swirl" class="text-sm font-semibold text-gray-600 hover:text-brand-navy">
+                Why Swirl
+            </a>
+
+            <a href="#resources" class="text-sm font-semibold text-gray-600 hover:text-brand-navy">
+                Resources
+            </a>
+
+            <a href="#demo"
+                class="w-full bg-brand-navy text-white text-sm font-bold px-5 py-3 rounded-lg mt-2 text-center">
+                Request a Demo
+            </a>
+        </div>
+    </nav>
+
+
+    <div class="bg-background-light text-white min-h-screen">
+        <div class="relative flex flex-col min-h-screen">
+            <main class="flex-1 flex flex-col md:flex-row min-h-screen">
+                <div
+                    class="w-full md:w-1/2 flex flex-col justify-center px-6 md:px-10 lg:px-24 xl:px-40 py-20 md:py-32 z-10 bg-white">
+                    <div class="max-w-xl space-y-8">
+                        <div class="space-y-6">
+                            <div
+                                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-[0.2em]">
+                                <span class="relative flex h-2 w-2">
+                                    <span
+                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                                </span>
+                                Voice-First AI for High-Consideration Buying
+                            </div>
+                            <h1
+                                class="text-slate-900 text-4xl md:text-6xl lg:text-8xl font-bold leading-[0.95] tracking-tighter font-display italic uppercase">
+                                The Voice of <br />
+                                <span
+                                    class="text-transparent bg-clip-text bg-gradient-to-br from-slate-900 via-primary to-blue-600">Luxury
+                                    Commerce</span>
+                            </h1>
+                            <p
+                                class="text-slate-500 text-base md:text-lg lg:text-xl font-normal leading-relaxed max-w-md">
+                                Empower your high-consideration brand with Swirl’s elite AI agents. Precision,
+                                intelligence,
+                                and seamless luxury integration.
+                            </p>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button
+                                class="flex min-w-[220px] items-center justify-center rounded-lg h-14 px-8 bg-primary text-white text-sm md:text-base font-bold shadow-xl shadow-primary/20 hover:bg-primary/90 transition-all group">
+                                Explore the Experience
+                                <span
+                                    class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                            </button>
+                            <button
+                                class="flex min-w-[160px] items-center justify-center rounded-lg h-14 px-8 border border-slate-200 bg-white text-slate-900 text-base font-bold hover:bg-slate-50 transition-all">
+                                View Demo
+                            </button>
+                        </div>
+                        <div class="pt-12 border-t border-slate-100 grid grid-cols-2 gap-12">
+                            <div>
+                                <p class="text-slate-900 text-3xl font-bold tracking-tight">98%</p>
+                                <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mt-1">Intent
+                                    Accuracy
+                                </p>
+                            </div>
+                            <div>
+                                <p class="text-slate-900 text-3xl font-bold tracking-tight">&lt; 200ms</p>
+                                <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mt-1">Voice Latency
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2 relative min-h-[400px] md:min-h-0 bg-slate-50 overflow-hidden">
+                    <div class="absolute inset-0 overflow-hidden">
+                        <div class="bg-slide bg-1"></div>
+                        <div class="bg-slide bg-2"></div>
+                        <div class="bg-slide bg-3"></div>
+
+                        <!-- overlays stay same -->
+                        <div class="absolute inset-0 bg-white/20"></div>
+                        <div class="absolute inset-0 bg-gradient-to-r from-white via-transparent to-transparent"></div>
+                    </div>
+
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="relative w-full max-w-lg aspect-video p-8">
+                            <div
+                                class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-80 hologram-glow-light border border-white/60 rounded-2xl overflow-hidden p-7 text-slate-800 scanline-light backdrop-blur-xl">
+                                <div class="flex items-center justify-between mb-10">
+                                    <div class="flex items-center gap-2">
+                                        <span
+                                            class="material-symbols-outlined text-white text-xl">record_voice_over</span>
+                                        <span class="text-[10px] font-bold tracking-[0.2em] uppercase text-white">Agent
+                                            Active</span>
+                                    </div>
+                                    <span class="material-symbols-outlined text-white text-sm">sensors</span>
+                                </div>
+                                <div class="space-y-6">
+                                    <div class="flex justify-center py-2">
+                                        <div class="flex items-end gap-1.5 h-10">
+                                            <div class="w-1.5 bg-white/40 rounded-full h-6 animate-bounce"
+                                                style="animation-delay: 0.1s;"></div>
+                                            <div class="w-1.5 bg-white/60 rounded-full h-10 animate-bounce"
+                                                style="animation-delay: 0.3s;"></div>
+                                            <div class="w-1.5 bg-white/30 rounded-full h-5 animate-bounce"
+                                                style="animation-delay: 0.2s;"></div>
+                                            <div class="w-1.5 bg-white/50 rounded-full h-8 animate-bounce"
+                                                style="animation-delay: 0.5s;"></div>
+                                            <div class="w-1.5 bg-white/40 rounded-full h-6 animate-bounce"
+                                                style="animation-delay: 0.4s;"></div>
+                                        </div>
+                                    </div>
+                                    <p class="text-[13px] font-medium text-center leading-relaxed text-white">
+                                        "Welcome back. I've prepared your personalized configuration..."
+                                    </p>
+                                    <div class="grid grid-cols-2 gap-3 pt-4">
+                                        <div
+                                            class="bg-white/50 border border-slate-200/50 p-2 rounded-lg text-[9px] font-bold text-white text-center tracking-wider">
+                                            INTENT: QUOTE
+                                        </div>
+                                        <div
+                                            class="bg-white/50 border border-slate-200/50 p-2 rounded-lg text-[9px] font-bold text-white text-center tracking-wider">
+                                            MOOD: CALM
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="absolute top-0 right-4 w-28 h-28 hologram-glow-light border border-white/60 rounded-full flex flex-col items-center justify-center scanline-light">
+                                <span class="text-2xl font-bold text-white">98%</span>
+                                <span
+                                    class="text-[8px] uppercase font-bold text-white tracking-tighter">Confidence</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="absolute bottom-10 right-10 flex items-center gap-3 text-slate-400">
+                        <span class="text-[10px] font-bold tracking-widest uppercase">Rotate View</span>
+                        <span class="material-symbols-outlined text-base">3d_rotation</span>
+                    </div>
+                </div>
+            </main>
+            <section class="bg-accent-gray px-10 py-32 border-t border-slate-100">
+                <div class="max-w-7xl mx-auto flex flex-col gap-16">
+
+                    <!-- Header -->
+                    <div class="flex flex-col md:flex-row justify-between items-end gap-10">
+                        <div class="max-w-2xl">
+                            <h4 class="text-primary text-xs font-bold tracking-[0.3em] uppercase mb-6">
+                                The Standard of Excellence
+                            </h4>
+                            <h2
+                                class="text-slate-900 text-4xl lg:text-5xl font-bold leading-[1.1] font-display tracking-tight">
+                                The Intelligence <br />Behind the Interface
+                            </h2>
+                        </div>
+
+                        <p class="text-slate-500 max-w-sm text-base leading-relaxed">
+                            Intelligence that understands buyer intent,
+                            guides high-consideration decisions,
+                            and converts with precision and restraint.
+
+                        </p>
+                    </div>
+
+                    <!-- Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pt-10">
+
+                        <!-- DOMINANT CARD -->
+                        <div class="group md:col-span-2 p-12 rounded-2xl bg-white border border-slate-100
+        shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-slate-300/50
+        transition-all duration-500">
+                            <div class="size-16 rounded-2xl bg-slate-50 flex items-center justify-center
+          text-primary mb-10 group-hover:bg-primary group-hover:text-white
+          transition-all duration-500">
+                                <span class="material-symbols-outlined text-3xl">psychology</span>
+                            </div>
+
+                            <h3 class="text-2xl font-bold text-slate-900 mb-4">
+                                Context Awareness
+                            </h3>
+
+                            <p class="text-slate-600 text-base leading-relaxed max-w-xl">
+                                Anticipates buyer intent from behavior, history,
+                                and real-time signals — adjusting tone, pace,
+                                and guidance to move decisions forward
+                                with confidence.
+                            </p>
+                        </div>
+
+                        <!-- SECONDARY CARD -->
+                        <div class="group p-10 rounded-2xl bg-white border border-slate-100
+        hover:border-primary/20 hover:shadow-xl hover:shadow-slate-200/40
+        transition-all duration-500">
+                            <div class="size-14 rounded-xl bg-slate-50 flex items-center justify-center
+          text-primary mb-8 group-hover:bg-primary group-hover:text-white
+          transition-all duration-500">
+                                <span class="material-symbols-outlined text-2xl">forum</span>
+                            </div>
+
+                            <h3 class="text-xl font-bold text-slate-900 mb-4">
+                                Natural Interaction
+                            </h3>
+
+                            <p class="text-slate-500 text-sm leading-relaxed">
+                                Buyers converse naturally by voice or text —
+                                asking real questions, exploring trade-offs,
+                                and progressing without friction or forms.
+                            </p>
+                        </div>
+
+                        <!-- SECONDARY CARD -->
+                        <div class="group md:col-span-3 p-10 rounded-2xl bg-white border border-slate-100
+        hover:border-primary/20 hover:shadow-xl hover:shadow-slate-200/40
+        transition-all duration-500">
+                            <div class="size-14 rounded-xl bg-slate-50 flex items-center justify-center
+          text-primary mb-8 group-hover:bg-primary group-hover:text-white
+          transition-all duration-500">
+                                <span class="material-symbols-outlined text-2xl">verified</span>
+                            </div>
+
+                            <h3 class="text-xl font-bold text-slate-900 mb-4">
+                                Brand Alignment
+                            </h3>
+
+                            <p class="text-slate-500 text-sm leading-relaxed">
+                                Every response reflects your brand’s voice,
+                                tone, and guardrails — ensuring AI sells
+                                the way your best teams do.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+        </div>
+    </div>
+
+    <section class="py-20 border-t border-gray-100 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <p class="text-center text-[11px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-12">
+                Leading enterprises scale with Swirl
+            </p>
+
+            <div class="marquee">
+                <div class="marquee-track">
+                    <!-- SET 1 -->
+                    <img src="./assets/al-badia.png" />
+                    <img src="./assets/Al-Futtaim.png" />
+                    <img src="./assets/BYD.png" />
+                    <img src="./assets/Denza_logo.png" />
+                    <img src="./assets/LG.png" />
+                    <img src="./assets/Vivo.png" />
+                    <img src="./assets/yangwang.png" />
+
+                    <!-- SET 2 (DUPLICATE — REQUIRED) -->
+                    <img src="./assets/al-badia.png" />
+                    <img src="./assets/Al-Futtaim.png" />
+                    <img src="./assets/BYD.png" />
+                    <img src="./assets/Denza_logo.png" />
+                    <img src="./assets/LG.png" />
+                    <img src="./assets/Vivo.png" />
+                    <img src="./assets/yangwang.png" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div
+        class="bg-background-light dark:bg-background-dark text-[#101018] dark:text-white transition-colors duration-300">
+        <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+
+
+            <!-- Main Layout Section -->
+            <main class="flex flex-1 flex-col lg:flex-row min-h-screen pt-24">
+                <!-- Left Side: Editorial Content -->
+                <div class="flex flex-1 flex-col justify-center px-6 md:px-12 lg:px-24 py-20 lg:py-0">
+                    <div class="max-w-[540px]">
+                        <span class="text-primary text-sm uppercase tracking-[0.3em] font-bold mb-8 block">Analysis
+                            01</span>
+                        <h1
+                            class="text-[#101018] dark:text-white text-4xl md:text-6xl lg:text-8xl font-black leading-[0.9] tracking-[-0.05em] mb-12">
+                            Commerce <br />Is Changing
+                        </h1>
+                        <div class="flex flex-col md:flex-row gap-8 md:gap-12 relative">
+                            <!-- Ultra-thin divider positioned between columns -->
+                            <div class="absolute left-1/2 top-0 bottom-0 ultra-thin-divider opacity-30 hidden md:block">
+                            </div>
+                            <!-- Column 1: What's Broken -->
+                            <div class="flex-1 md:pr-6">
+                                <h3 class="text-xs uppercase tracking-widest font-bold mb-6 text-primary/60">
+                                    What's Broken
+                                </h3>
+                                <div class="flex flex-col gap-6">
+                                    <div class="border-t border-gray-100 pt-4">
+                                        <p class="text-lg leading-relaxed italic text-gray-500 mb-2">Friction
+                                        </p>
+                                        <p class="text-sm leading-relaxed opacity-80">Legacy pages, filters, and forms
+                                            fail to capture
+                                            buyer nuance — creating disjointed journeys
+                                            that erode brand value.</p>
+                                    </div>
+                                    <div class="border-t border-gray-100 pt-4">
+                                        <p class="text-lg leading-relaxed italic text-gray-500 mb-2">
+                                            Fragmentation</p>
+                                        <p class="text-sm leading-relaxed opacity-80">Disconnected touchpoints force
+                                            buyers to
+                                            repeatedly re-explain intent — leading to
+                                            lost prestige and missed high-value decisions.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Column 2: What's Expected -->
+                            <div class="flex-1 md:pl-6">
+                                <h3 class="text-xs uppercase tracking-widest font-bold mb-6 text-primary">What's
+                                    Expected
+                                </h3>
+                                <div class="flex flex-col gap-6">
+                                    <div class="border-t border-gray-100 pt-4">
+                                        <p class="text-lg leading-relaxed italic text-primary/80 mb-2">
+                                            Seamlessness</p>
+                                        <p class="text-sm leading-relaxed opacity-90">
+                                            Voice-first intelligence that understands intent
+                                            and guides decisions — creating a continuous
+                                            journey across digital and physical touchpoints.
+                                        </p>
+                                    </div>
+                                    <div class="border-t border-gray-100 pt-4">
+                                        <p class="text-lg leading-relaxed italic text-primary/80 mb-2">Pure
+                                            Context</p>
+                                        <p class="text-sm leading-relaxed opacity-90">Invisible intelligence that
+                                            understands intent,
+                                            remembers preferences, and responds with
+                                            precision — without ever breaking the experience.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-16 flex items-center gap-4 group cursor-pointer">
+                            <div class="h-[1px] w-12 bg-primary group-hover:w-20 transition-all duration-500">
+                            </div>
+                            <span class="text-xs uppercase tracking-[0.2em] font-bold">Discover the
+                                Narrative</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right Side: Full-Bleed Imagery -->
+                <div class="flex-1 relative min-h-[350px] md:min-h-[500px] lg:min-h-screen overflow-hidden">
+                    <!-- Background Image (BYD Luxury Interior) -->
+                    <div class="absolute inset-0 bg-center bg-cover transition-transform duration-700 hover:scale-105"
+                        data-alt="Interior of a luxury BYD car with leather detailing and modern dashboard"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDj2FAvwHImyT-xIbuPhPsxNHSG9LBPPI_KsPYUe4ZkGvMC0tHyqH-SO5-JlxoY_oHkeP6_c8nAZR9QF_cWza1c78442JJi38tTeX5Cz1bSE3nyqLXlBbfp8v3cK7HS7PsXpyG1Gmh2JnAlBzLibhIJMail1042-WcuKp1CVGNDjXCpmcWALSZGIw_wMs0zSHryKZPVMLYHLfmzD1jPteB-L5QBF8Ucd3rZD9qu0Znhftz6HKkz-rSL8HX9-dVivQZIhbRwuQJFYQ4");'>
+                    </div>
+                    <!-- Overlay Gradient for Depth -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-white/10 dark:to-background-dark/20">
+                    </div>
+                    <!-- Floating Voice UI Mockup -->
+                    <div
+                        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 border border-white/20 rounded-full flex items-center justify-center backdrop-blur-sm bg-white/5 glow-overlay">
+                        <div class="flex flex-col items-center text-center px-8">
+                            <span class="material-symbols-outlined text-white text-4xl mb-4 animate-pulse">waves</span>
+                            <p class="text-white text-[10px] uppercase tracking-[0.3em] font-bold mb-1">Swirl
+                                Active</p>
+                            <p class="text-white/70 text-[13px] leading-tight italic">"Adjusting ambient
+                                lighting to match
+                                your evening itinerary."</p>
+                        </div>
+                    </div>
+                    <!-- Image Caption Label -->
+                    <div class="absolute bottom-12 right-12 text-right">
+                        <p class="text-white text-[10px] uppercase tracking-[0.4em] font-bold opacity-60 mb-2">
+                            Integration
+                            Focus</p>
+                        <h4 class="text-white text-2xl font-display italic">The BYD Executive Cabin</h4>
+                    </div>
+                </div>
+            </main>
+            <!-- Feature Details Footer -->
+            <section
+                class="bg-[#f8f8fa] dark:bg-background-dark/50 px-12 lg:px-24 py-24 border-t border-gray-100 dark:border-white/5">
+                <div class="max-w-[1200px] mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+                        <div class="flex flex-col gap-4">
+                            <span class="material-symbols-outlined text-primary text-3xl">visibility</span>
+                            <h2 class="text-2xl font-bold tracking-tight">Cognitive Confidence</h2>
+                            <p class="text-sm leading-relaxed text-gray-500 dark:text-gray-400">Every word is designed
+                                to be read, understood,
+                                and trusted — reducing hesitation and increasing
+                                buyer confidence at every step.</p>
+                        </div>
+                        <div class="flex flex-col gap-4">
+                            <span class="material-symbols-outlined text-primary text-3xl">location_on</span>
+                            <h2 class="text-2xl font-bold tracking-tight">Situational Intelligence</h2>
+                            <p class="text-sm leading-relaxed text-gray-500 dark:text-gray-400">Swirl responds within
+                                real-life contexts —
+                                from showrooms to living rooms —
+                                grounding decisions in how products are
+                                actually experienced.</p>
+                        </div>
+                        <div class="flex flex-col gap-4">
+                            <span class="material-symbols-outlined text-primary text-3xl">target</span>
+                            <h2 class="text-2xl font-bold tracking-tight">Intent-First Design</h2>
+                            <p class="text-sm leading-relaxed text-gray-500 dark:text-gray-400">Every interaction is
+                                shaped around buyer intent,
+                                not clicks — allowing conversations to replace
+                                filters, forms, and fragmented journeys.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+        </div>
+    </div>
+
+    <!-- Executive Strategic Circle Responsive Section -->
+    <!-- Mobile: Vertical Timeline Version -->
+    <div class="block md:hidden">
+        <main class="relative max-w-md mx-auto px-6 pt-10 pb-16">
+            <div class="text-center mb-12">
+                <h1 class="text-3xl font-black tracking-tighter mb-4 dark:text-white leading-tight">AI that completes
+                    the journey</h1>
+                <p class="text-sm text-primary/60 dark:text-white/60 max-w-xs mx-auto">
+                    Swirl replaces pages, filters, and forms with autonomous AI agents that guide, act, and convert.
+                </p>
+            </div>
+            <div class="relative mb-24">
+                <div class="sticky top-40 z-0 flex justify-center h-0 overflow-visible">
+                    <div
+                        class="size-16 bg-white dark:bg-background-dark border border-primary/20 rounded-full shadow-xl flex items-center justify-center glow-effect">
+                        <span class="material-symbols-outlined text-primary text-2xl">psychology</span>
+                    </div>
+                </div>
+                <div class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 pulse-line -z-10"></div>
+                <div class="space-y-12">
+                    <div class="relative flex flex-col items-center">
+                        <div class="w-full bg-white dark:bg-white/5 p-5 rounded-2xl border border-primary/5 shadow-sm">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="material-symbols-outlined text-primary text-xl">neurology</span>
+                                <h3 class="font-bold text-base dark:text-white uppercase tracking-wider">Understand</h3>
+                            </div>
+                            <p class="text-xs leading-relaxed text-primary/70 dark:text-white/70 mb-4">
+                                Swirl understands what buyers actually mean — not just what they type or say.
+                                It interprets messy, natural language, context, and constraints to uncover the real
+                                buying intent behind every interaction.
+                            </p>
+                            <div class="flex gap-1.5">
+                                <span
+                                    class="px-2 py-0.5 bg-primary/5 rounded text-[9px] font-bold uppercase tracking-wider dark:text-white/50">NLP</span>
+                                <span
+                                    class="px-2 py-0.5 bg-primary/5 rounded text-[9px] font-bold uppercase tracking-wider dark:text-white/50">Intent</span>
+                            </div>
+                        </div>
+                        <div
+                            class="mt-4 size-2 bg-primary rounded-full ring-4 ring-white dark:ring-background-dark z-10">
+                        </div>
+                    </div>
+                    <div class="relative flex flex-col items-center">
+                        <div class="w-full bg-white dark:bg-white/5 p-5 rounded-2xl border border-primary/5 shadow-sm">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="material-symbols-outlined text-primary text-xl">record_voice_over</span>
+                                <h3 class="font-bold text-base dark:text-white uppercase tracking-wider">Speak</h3>
+                            </div>
+                            <p class="text-xs leading-relaxed text-primary/70 dark:text-white/70 mb-4">
+                                Swirl speaks in clear, human language — via text or voice — guiding buyers through
+                                complex decisions without jargon, forms, or friction.
+                            </p>
+                            <div class="flex gap-1.5">
+                                <span
+                                    class="px-2 py-0.5 bg-primary/5 rounded text-[9px] font-bold uppercase tracking-wider dark:text-white/50">Voice
+                                    & Text</span>
+                                <span
+                                    class="px-2 py-0.5 bg-primary/5 rounded text-[9px] font-bold uppercase tracking-wider dark:text-white/50">Buyer
+                                    Guidance</span>
+                            </div>
+                        </div>
+                        <div
+                            class="mt-4 size-2 bg-primary rounded-full ring-4 ring-white dark:ring-background-dark z-10">
+                        </div>
+                    </div>
+                    <div class="relative flex flex-col items-center">
+                        <div class="w-full bg-white dark:bg-white/5 p-5 rounded-2xl border border-primary/5 shadow-sm">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="material-symbols-outlined text-primary text-xl">payments</span>
+                                <h3 class="font-bold text-base dark:text-white uppercase tracking-wider">Act</h3>
+                            </div>
+                            <p class="text-xs leading-relaxed text-primary/70 dark:text-white/70 mb-4">
+                                Swirl doesn’t stop at answers.
+                                It autonomously navigates, compares, configures, and executes multi-step tasks to move
+                                buyers from intent to conversion in one flow.
+                            </p>
+                            <div class="flex gap-1.5">
+                                <span
+                                    class="px-2 py-0.5 bg-primary/5 rounded text-[9px] font-bold uppercase tracking-wider dark:text-white/50">Browser
+                                    Autonomy</span>
+                                <span
+                                    class="px-2 py-0.5 bg-primary/5 rounded text-[9px] font-bold uppercase tracking-wider dark:text-white/50">Commerce
+                                    Execution
+                                </span>
+                            </div>
+                        </div>
+                        <div
+                            class="mt-4 size-2 bg-primary rounded-full ring-4 ring-white dark:ring-background-dark z-10">
+                        </div>
+                    </div>
+                    <div class="relative flex flex-col items-center">
+                        <div class="w-full bg-white dark:bg-white/5 p-5 rounded-2xl border border-primary/5 shadow-sm">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="material-symbols-outlined text-primary text-xl">query_stats</span>
+                                <h3 class="font-bold text-base dark:text-white uppercase tracking-wider">Learn</h3>
+                            </div>
+                            <p class="text-xs leading-relaxed text-primary/70 dark:text-white/70 mb-4">
+                                Every interaction continuously improves the system and feeds actionable insights back
+                                into your business — across sales, marketing, and product teams.
+                            </p>
+                            <div class="flex gap-1.5">
+                                <span
+                                    class="px-2 py-0.5 bg-primary/5 rounded text-[9px] font-bold uppercase tracking-wider dark:text-white/50">Insights
+                                    Hub</span>
+                                <span
+                                    class="px-2 py-0.5 bg-primary/5 rounded text-[9px] font-bold uppercase tracking-wider dark:text-white/50">Continuous
+                                    Learning</span>
+                            </div>
+                        </div>
+                        <div
+                            class="mt-4 size-2 bg-primary rounded-full ring-4 ring-white dark:ring-background-dark z-10">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 gap-4 mb-20">
+                <div class="p-6 rounded-2xl bg-primary text-white shadow-xl shadow-primary/20">
+                    <h4 class="text-white/60 text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Efficiency Gain</h4>
+                    <div class="text-4xl font-black">84%</div>
+                    <p class="text-[10px] mt-2 text-white/50">Reduction in touch-points per transaction.</p>
+                </div>
+                <div class="p-6 rounded-2xl border border-primary/10 bg-white dark:bg-white/5">
+                    <h4
+                        class="text-primary/40 text-[10px] font-bold uppercase tracking-[0.2em] mb-1 dark:text-white/30">
+                        Response Time</h4>
+                    <div class="text-4xl font-black dark:text-white">120ms</div>
+                    <p class="text-[10px] mt-2 text-primary/30 dark:text-white/30">Sub-perceptual latency for voice.</p>
+                </div>
+                <div class="p-6 rounded-2xl border border-primary/10 bg-white dark:bg-white/5">
+                    <h4
+                        class="text-primary/40 text-[10px] font-bold uppercase tracking-[0.2em] mb-1 dark:text-white/30">
+                        Accuracy</h4>
+                    <div class="text-4xl font-black dark:text-white">99.8%</div>
+                    <p class="text-[10px] mt-2 text-primary/30 dark:text-white/30">Intent recognition success rate.</p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+    <!-- Desktop: Original Diagram Version -->
+    <div class="hidden md:block">
+        <div
+            class="bg-background-light dark:bg-background-dark font-display text-primary transition-colors duration-300 min-h-screen">
+            <main class="relative max-w-7xl mx-auto px-6 pt-12 pb-24">
+                <!-- Page Heading -->
+                <div class="text-center mb-16">
+                    <h1 class="text-4xl md:text-5xl font-black tracking-tighter mb-4 dark:text-white">AI that completes
+                        the journey
+                    </h1>
+                    <p class="text-lg text-primary/60 dark:text-white/60 max-w-2xl mx-auto">
+                        Swirl replaces pages, filters, and forms with autonomous AI agents that guide, act, and convert.
+                    </p>
+                </div>
+                <!-- Strategic Diagram Section -->
+                <div
+                    class="relative w-full aspect-[16/10] md:aspect-[21/9] flex items-center justify-center overflow-visible">
+                    <!-- Central Diagram SVG -->
+                    <svg class="absolute inset-0 w-full h-full pointer-events-none" viewbox="0 0 1000 500">
+                        <!-- Main Circle -->
+                        <circle class="circle-path opacity-20" cx="500" cy="250" r="160"></circle>
+                        <!-- Leader Lines to Corners -->
+                        <!-- Top Left (Understand) -->
+                        <line class="leader-line" x1="180" x2="500" y1="80" y2="90"></line>
+                        <!-- Top Right (Speak) -->
+                        <line class="leader-line" x1="820" x2="660" y1="80" y2="250"></line>
+                        <!-- Bottom Right (Act) -->
+                        <line class="leader-line" x1="820" x2="500" y1="420" y2="410"></line>
+                        <!-- Bottom Left (Learn) -->
+                        <line class="leader-line" x1="180" x2="340" y1="420" y2="250"></line>
+                        <!-- Cardinal Point Markers -->
+                        <circle cx="500" cy="90" fill="#000280" r="6"></circle> <!-- North -->
+                        <circle cx="660" cy="250" fill="#000280" r="6"></circle> <!-- East -->
+                        <circle cx="500" cy="410" fill="#000280" r="6"></circle> <!-- South -->
+                        <circle cx="340" cy="250" fill="#000280" r="6"></circle> <!-- West -->
+                    </svg>
+                    <!-- Central Hub -->
+                    <div
+                        class="relative z-10 flex items-center justify-center size-32 bg-white dark:bg-background-dark border-2 border-primary rounded-full shadow-2xl glow-effect">
+                        <span class="material-symbols-outlined text-primary text-5xl">psychology</span>
+                        <div
+                            class="absolute -bottom-8 whitespace-nowrap text-[10px] font-bold tracking-[0.2em] uppercase text-primary/40 dark:text-white/40">
+                            Touchless Commerce Engine</div>
+                    </div>
+                    <!-- Strategic Content Blocks (The Corners) -->
+                    <!-- Top Left: Understand (North) -->
+                    <div
+                        class="absolute top-0 left-0 w-72 bg-white/40 dark:bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-primary/10">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="material-symbols-outlined text-primary">neurology</span>
+                            <h3 class="font-bold text-lg dark:text-white">Understand</h3>
+                        </div>
+                        <p class="text-sm leading-relaxed text-primary/70 dark:text-white/70">
+                            Swirl understands what buyers mean — not just what they say — interpreting natural language
+                            and context to reveal true buying intent.
+                        </p>
+                        <div class="mt-4 flex gap-2">
+                            <span
+                                class="px-2 py-1 bg-primary/5 rounded text-[10px] font-bold uppercase tracking-wider dark:text-white/50">NLP</span>
+                            <span
+                                class="px-2 py-1 bg-primary/5 rounded text-[10px] font-bold uppercase tracking-wider dark:text-white/50">Intent</span>
+                        </div>
+                    </div>
+                    <!-- Top Right: Speak (East) -->
+                    <div
+                        class="absolute top-0 right-0 w-72 bg-white/40 dark:bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-primary/10">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="material-symbols-outlined text-primary">record_voice_over</span>
+                            <h3 class="font-bold text-lg dark:text-white">Speak</h3>
+                        </div>
+                        <p class="text-sm leading-relaxed text-primary/70 dark:text-white/70">
+                            Swirl speaks in clear, human language — via text or voice — guiding buyers through complex
+                            decisions without jargon, forms, or friction.
+                        </p>
+                        <div class="mt-4 flex gap-2">
+                            <span
+                                class="px-2 py-1 bg-primary/5 rounded text-[10px] font-bold uppercase tracking-wider dark:text-white/50">Voice
+                                & Text</span>
+                            <span
+                                class="px-2 py-1 bg-primary/5 rounded text-[10px] font-bold uppercase tracking-wider dark:text-white/50">Buyer
+                                Guidance</span>
+                        </div>
+                    </div>
+                    <!-- Bottom Left: Learn (West) -->
+                    <div
+                        class="absolute bottom-0 left-0 w-72 bg-white/40 dark:bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-primary/10">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="material-symbols-outlined text-primary">query_stats</span>
+                            <h3 class="font-bold text-lg dark:text-white">Learn</h3>
+                        </div>
+                        <p class="text-sm leading-relaxed text-primary/70 dark:text-white/70">
+                            Every interaction continuously improves the system and feeds actionable insights back into
+                            your business — across sales, marketing, and product teams.
+                        </p>
+                        <div class="mt-4 flex gap-2">
+                            <span
+                                class="px-2 py-1 bg-primary/5 rounded text-[10px] font-bold uppercase tracking-wider dark:text-white/50">Continuous
+                                Learning</span>
+                            <span
+                                class="px-2 py-1 bg-primary/5 rounded text-[10px] font-bold uppercase tracking-wider dark:text-white/50">Insight
+                                Hub</span>
+                        </div>
+                    </div>
+                    <!-- Bottom Right: Act (South) -->
+                    <div
+                        class="absolute bottom-0 right-0 w-72 bg-white/40 dark:bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-primary/10">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="material-symbols-outlined text-primary">payments</span>
+                            <h3 class="font-bold text-lg dark:text-white">Act</h3>
+                        </div>
+                        <p class="text-sm leading-relaxed text-primary/70 dark:text-white/70">
+                            Swirl doesn’t stop at answers.
+                            It autonomously navigates, compares, configures, and executes multi-step tasks to move
+                            buyers from intent to conversion in one flow.
+                        </p>
+                        <div class="mt-4 flex gap-2">
+                            <span
+                                class="px-2 py-1 bg-primary/5 rounded text-[10px] font-bold uppercase tracking-wider dark:text-white/50">Browser
+                                Autonomy
+                            </span>
+                            <span
+                                class="px-2 py-1 bg-primary/5 rounded text-[10px] font-bold uppercase tracking-wider dark:text-white/50">Commerce
+                                Execution
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Bottom Stats/Detail Section -->
+                <div class="mt-24 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="p-6 rounded-xl border border-primary/10 bg-white dark:bg-white/5">
+                        <h4 class="text-primary/60 text-xs font-bold uppercase tracking-widest mb-2 dark:text-white/40">
+                            Efficiency
+                            Gain</h4>
+                        <div class="text-3xl font-black">84%</div>
+                        <p class="text-xs mt-2 text-primary/40 dark:text-white/40">Reduction in touch-points per
+                            transaction.</p>
+                    </div>
+                    <div class="p-6 rounded-xl border border-primary/10 bg-white dark:bg-white/5">
+                        <h4 class="text-primary/60 text-xs font-bold uppercase tracking-widest mb-2 dark:text-white/40">
+                            Response
+                            Time</h4>
+                        <div class="text-3xl font-black dark:text-white">120ms</div>
+                        <p class="text-xs mt-2 text-primary/40 dark:text-white/40">Sub-perceptual latency for voice
+                            interactions.</p>
+                    </div>
+                    <div class="p-6 rounded-xl border border-primary/10 bg-white dark:bg-white/5">
+                        <h4 class="text-primary/60 text-xs font-bold uppercase tracking-widest mb-2 dark:text-white/40">
+                            Accuracy
+                        </h4>
+                        <div class="text-3xl font-black dark:text-white">99.8%</div>
+                        <p class="text-xs mt-2 text-primary/40 dark:text-white/40">Intent recognition success across 40+
+                            languages.</p>
+                    </div>
+                </div>
+                <!-- Image Gallery/Case Studies Sub-section -->
+            </main>
+        </div>
+    </div>
+    <main>
+        <section class="bg-light-grey py-20 md:py-32">
+            <div class="max-w-[1280px] mx-auto px-6">
+                <div class="flex flex-col gap-12 lg:flex-row items-stretch">
+                    <div class="w-full lg:w-1/2">
+                        <div
+                            class="h-full rounded-2xl bg-white p-4 shadow-sm border border-card-border overflow-hidden">
+                            <div class="relative h-full min-h-[400px] w-full bg-center bg-no-repeat bg-cover rounded-xl overflow-hidden"
+                                data-alt="Sleek electric vehicle interior with modern dashboard display"
+                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCIGo-3l7hNfD9xUKL3LotoM1g4fKC8eDonPsynohcqsavXzVyGBwD4CJRMqgmETvS28lPaE560p_mT6wPJS2A-en_e2G71-LtqLjMftUYW5r_Oecrl6r6J2sM6AFBPxwSRSA8JLRAS72BiKwDh0cWC3OlZBJ54a7h1i5BG21m7gNdMutYFMTP4evr-IyOeQkAhJfOjR-A_nAr02jyXl2D1YhxEbSmzTZfG7S2QG-QkhhchONQqX5HhCBDZ5efrvzmPhAovmaUjPc0");'>
+                                <div class="absolute inset-0 bg-primary/5"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="w-full lg:w-1/2 flex flex-col gap-8 bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-card-border">
+                        <div class="flex flex-col gap-4">
+                            <div
+                                class="flex items-center gap-2 text-primary font-bold uppercase tracking-widest text-xs">
+                                <span class="w-8 h-[2px] bg-primary"></span>
+                                Featured Case Study
+                            </div>
+                            <h1 class="text-4xl md:text-5xl font-black leading-tight tracking-tight text-slate-900">
+                                AI Advisor <br />
+                                <span class="text-primary">Results</span>
+                            </h1>
+                            <p class="text-lg text-slate-600 leading-relaxed">
+                                How Swirl helped a global automotive brand move buyers from questions to test-drive
+                                bookings in a single AI-led conversation — increasing engagement, conversion, and ROI
+                                without replatforming.
+                            </p>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="flex flex-col gap-2 rounded-xl p-6 bg-light-grey/50 border border-card-border">
+                                <p class="text-slate-500 text-xs font-bold uppercase tracking-wider">Engagement</p>
+                                <p class="text-primary text-4xl font-black tracking-tight">+27%</p>
+                                <p class="text-emerald-600 text-xs font-bold flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-sm">trending_up</span> Benchmark beat
+                                </p>
+                            </div>
+                            <div class="flex flex-col gap-2 rounded-xl p-6 bg-light-grey/50 border border-card-border">
+                                <p class="text-slate-500 text-xs font-bold uppercase tracking-wider">Conversion</p>
+                                <p class="text-primary text-4xl font-black tracking-tight">+15%</p>
+                                <p class="text-emerald-600 text-xs font-bold flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-sm">trending_up</span> Sales lift
+                                </p>
+                            </div>
+                            <div class="flex flex-col gap-2 rounded-xl p-6 bg-light-grey/50 border border-card-border">
+                                <p class="text-slate-500 text-xs font-bold uppercase tracking-wider">ROI</p>
+                                <p class="text-primary text-4xl font-black tracking-tight">4.2x</p>
+                                <p class="text-emerald-600 text-xs font-bold flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-sm">trending_up</span> Annual growth
+                                </p>
+                            </div>
+                        </div>
+                        <div class="pt-4">
+                            <p class="text-sm text-slate-500 italic border-t border-slate-200 pt-4">
+                                Deployed on existing product pages. No replatforming required.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-24 bg-off-white">
+            <div class="max-w-[1280px] mx-auto px-6">
+                <div class="flex flex-col gap-16">
+                    <div class="flex flex-col gap-4 text-center items-center">
+                        <h2 class="text-3xl md:text-5xl font-black leading-tight tracking-tight text-slate-900">
+                            Why Teams Choose Swirl
+                        </h2>
+                        <div class="w-20 h-1.5 bg-primary rounded-full"></div>
+                        <p class="text-lg text-slate-600 max-w-[640px] mt-2">
+                            The intelligence layer that turns conversations into completed journeys.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div
+                            class="flex flex-col gap-6 rounded-[2rem] bg-light-grey p-10 transition-all hover:bg-slate-200/50 border border-transparent hover:border-slate-300">
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-primary">
+                                <span class="material-symbols-outlined text-3xl">monitoring</span>
+                            </div>
+                            <div class="flex flex-col gap-3">
+                                <h3 class="text-2xl font-bold text-slate-900">Real-time Insights</h3>
+                                <p class="text-slate-600 text-base leading-relaxed">
+                                    Understand buyer intent as it unfolds — not after the fact.
+                                    Swirl processes live conversational, behavioral, and product signals to guide buyers
+                                    toward the next best action instantly.
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex flex-col gap-6 rounded-[2rem] bg-light-grey p-10 transition-all hover:bg-slate-200/50 border border-transparent hover:border-slate-300">
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-primary">
+                                <span class="material-symbols-outlined text-3xl">security</span>
+                            </div>
+                            <div class="flex flex-col gap-3">
+                                <h3 class="text-2xl font-bold text-slate-900">Enterprise Security</h3>
+                                <p class="text-slate-600 text-base leading-relaxed">
+                                    Built for global brands operating at scale.
+                                    SOC 2 compliant architecture with strict data isolation, auditability, and privacy
+                                    controls — without slowing deployment.
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex flex-col gap-6 rounded-[2rem] bg-light-grey p-10 transition-all hover:bg-slate-200/50 border border-transparent hover:border-slate-300">
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-primary">
+                                <span class="material-symbols-outlined text-3xl">integration_instructions</span>
+                            </div>
+                            <div class="flex flex-col gap-3">
+                                <h3 class="text-2xl font-bold text-slate-900">Seamless Integration</h3>
+                                <p class="text-slate-600 text-base leading-relaxed">
+                                    Swirl runs on top of your existing product pages, CRM, and CMS.
+                                    Integrate via APIs and SDKs to activate AI-led journeys without rebuilding your
+                                    stack.
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex flex-col gap-6 rounded-[2rem] bg-light-grey p-10 transition-all hover:bg-slate-200/50 border border-transparent hover:border-slate-300">
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-primary">
+                                <span class="material-symbols-outlined text-3xl">palette</span>
+                            </div>
+                            <div class="flex flex-col gap-3">
+                                <h3 class="text-2xl font-bold text-slate-900">Customizable UI</h3>
+                                <p class="text-slate-600 text-base leading-relaxed">
+                                    Full control over tone, voice, and UI — so every interaction feels like your best
+                                    salesperson, not a third-party widget.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="px-6 py-24 mb-12">
+            <div class="max-w-[1280px] mx-auto p-4 md:p-8 border border-slate-200 rounded-[3rem] bg-white shadow-xl">
+                <div class="relative overflow-hidden rounded-[2.5rem] bg-primary px-8 py-20 text-center">
+                    <div
+                        class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-[500px] h-[500px] bg-white/5 rounded-full blur-3xl">
+                    </div>
+                    <div
+                        class="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-80 h-80 bg-black/20 rounded-full blur-3xl">
+                    </div>
+                    <div class="relative z-10 max-w-[840px] mx-auto flex flex-col items-center gap-10">
+                        <div class="flex flex-col gap-6">
+                            <h2 class="text-4xl md:text-6xl font-black tracking-tight text-white leading-[1.1]">
+                                Your AI-Powered Buying Journey Starts Here
+                            </h2>
+                            <p class="text-lg md:text-xl text-white/80 max-w-[640px] mx-auto font-medium">
+                                Move buyers from first question to conversion in one autonomous AI-led experience —
+                                without rebuilding your stack.
+                            </p>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-4 w-full justify-center">
+                            <button
+                                class="flex min-w-[220px] cursor-pointer items-center justify-center rounded-xl h-16 px-10 bg-white text-primary text-lg font-black transition-all hover:bg-slate-50 active:scale-95 shadow-xl shadow-black/20">
+                                Get a Free Demo
+                            </button>
+                            <button
+                                class="flex min-w-[220px] cursor-pointer items-center justify-center rounded-xl h-16 px-10 bg-transparent border-2 border-white/30 text-white text-lg font-bold transition-all hover:bg-white/10 hover:border-white/50 backdrop-blur-sm">
+                                Contact Sales
+                            </button>
+                        </div>
+                        <div class="flex flex-col items-center gap-4 pt-6">
+                            <div class="flex -space-x-3 overflow-hidden">
+                                <img class="inline-block h-12 w-12 rounded-full ring-4 ring-primary bg-slate-200"
+                                    data-alt="Customer avatar 1"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkBz3E633CqcJbCx3E-PncDXIa3DZ8RbrryobpWRVY1z86lIPHkRQtIYSdOiRoH8vFqwyINsthTFrnLL4Jx5mL6cN4nuznYpF492FthM_i4eKUdwc-tpYuvNP27-rCzJlQqnjmr6Q1NcGZm7k9ddS5r5gYuLQSZoV9jQ04cgBnEF-j0vREN8MqnGIRYTofnbjVEpd3H-oMvi64Dfhyg3DTfBxepqX5LzVe6onbqzjanIOUsAC2mrqnKVfpzgDSp2F48iicpQ_yuPI" />
+                                <img class="inline-block h-12 w-12 rounded-full ring-4 ring-primary bg-slate-200"
+                                    data-alt="Customer avatar 2"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1UV2gQ7Xl1c67z_J4ODt9R1_gqRNcogk9ry5RubzQgC6ctADuU2WDkLr_o-qyYTnYcvlI6Dp7XD7dMp8Za_rg_MZhwldeAeA8QVPXOm0Bz2yTJEVWghWXQTNJtxLVu2dXezp0RYjmlFuhOHBx20F2E_Q4ZalAZmQRNcoxHflfOL2mCQ4lKOdlVHxfLX2ZZPHblTRpja5FihCvuH7yWfGrcW6gV0sZ1QGybgsO6HkGG49KQP8He5942TTVAgHwM7xxufnQtw9ccEQ" />
+                                <img class="inline-block h-12 w-12 rounded-full ring-4 ring-primary bg-slate-200"
+                                    data-alt="Customer avatar 3"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBusqgE6aTNoCiRUluwLwnv9QPks90k9P2WzwrdWGcDf5f63ihz5G7NEe-8kc9PlA0IeepKEj4PVvIkfW0V0e3dLbLu3-FFx3m8CdqcyORFJXoy90j4n-MmhKD-5FL85bpQNwW9moZX0u3smxSgUotLSIWeo1FwzjN8QDCiOfSENNvuwcTD732RXimNWsspR5tc9xmQh6Uwx45MC5M-o_5bfzCzpUBRBONAnGxmPLPI5trZYZOzdouvo9_7KWvAJxHKKyLSJjCxWoU" />
+                                <div
+                                    class="flex items-center justify-center h-12 w-12 rounded-full ring-4 ring-primary bg-slate-900 text-[12px] font-black text-white uppercase">
+                                    +12k
+                                </div>
+                            </div>
+                            <p class="text-white/60 text-sm font-semibold tracking-wide">Trusted by leading global
+                                brands to power high-consideration buying journeys
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-slate-200 px-6 py-16 bg-white">
+        <div class="max-w-[1280px] mx-auto grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12">
+            <div class="col-span-2 flex flex-col gap-6">
+                <div class="flex items-center gap-2">
+
+                    <h2 class="text-xl font-bold tracking-tight text-primary">Swirl</h2>
+                </div>
+                <p class="text-slate-500 max-w-[300px] text-sm leading-relaxed font-medium">
+                    An AI-powered commerce platform built to complete complex customer journeys.
+                </p>
+                <p class="text-slate-500 max-w-[300px] text-sm leading-relaxed font-medium">Built for global brands.
+                    Deployed without replatforming.</p>
+            </div>
+            <div>
+                <h4 class="font-black mb-6 text-xs uppercase tracking-[0.2em] text-slate-400">Platform</h4>
+                <ul class="flex flex-col gap-4 text-sm font-semibold text-slate-600">
+                    <li><a class="hover:text-primary transition-colors" href="#">Overview</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#">Features</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#">Security</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-black mb-6 text-xs uppercase tracking-[0.2em] text-slate-400">Company</h4>
+                <ul class="flex flex-col gap-4 text-sm font-semibold text-slate-600">
+                    <li><a class="hover:text-primary transition-colors" href="#">About</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-black mb-6 text-xs uppercase tracking-[0.2em] text-slate-400">Resources</h4>
+                <ul class="flex flex-col gap-4 text-sm font-semibold text-slate-600">
+                    <li><a class="hover:text-primary transition-colors" href="#">Documentation</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#">Help Center</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#">Legal</a></li>
+                </ul>
+            </div>
+        </div>
+        <div
+            class="max-w-[1280px] mx-auto pt-12 mt-16 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-6 text-xs text-slate-400 font-bold uppercase tracking-widest">
+            <p>© 2024 Swirl Technologies Inc.</p>
+            <div class="flex gap-8">
+                <a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+                <a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+                <a class="hover:text-primary transition-colors" href="#">Cookies</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

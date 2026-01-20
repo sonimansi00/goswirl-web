@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SWIRL | The Intelligence Behind Luxury</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec1349",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#0a0a0a",
+                        "obsidian": "#0a0a0a",
+                        "burgundy-dark": "#221015",
+                        "burgundy-glow": "#48232c",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24
+        }
+
+        .grid-bg {
+            background-image: radial-gradient(circle at 1px 1px, rgba(236, 19, 73, 0.05) 1px, transparent 0);
+            background-size: 40px 40px
+        }
+
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.03;
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCKB5YaOVBtPo6JVXeV7nhPmgM76qaqwegU1gEyIKu98GudJKi40iUv1Jd5b_bPk5NmSgFKzbSuGOPvK6VygbCGFpCU0Y_dmmphjglKyEna7jkiqhvw2KxMuhi_Lf3Qjl0RC67ZpK4T8IbvuyJOG_BSF9AvNfJkTLFm2HHK0nbHeJwffa2uhuC92NmzlqJpaB8Uye2C9Vv6Xwx3Fdu9oJfZj0TUpL_twD5zBCVBuUyfgdOrWVAuqB23Jc1w_9kuPa9uN3BU9wMStQ)
+        }
+
+        .glass-card {
+            background: rgba(34, 16, 21, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(236, 19, 73, 0.2)
+        }
+
+        .hero-glow {
+            filter: drop-shadow(0 0 30px rgba(236, 19, 73, 0.3))
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-white selection:bg-primary/30">
+    <div class="grain-overlay"></div>
+    <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden grid-bg">
+        <!-- Navigation -->
+        <header
+            class="sticky top-0 z-40 flex items-center justify-between border-b border-primary/10 bg-background-dark/80 px-6 py-4 backdrop-blur-md lg:px-20">
+            <div class="flex items-center gap-3">
+                <div class="text-primary hero-glow">
+                    <svg class="size-8" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M42.4379 44C42.4379 44 36.0744 33.9038 41.1692 24C46.8624 12.9336 42.2078 4 42.2078 4L7.01134 4C7.01134 4 11.6577 12.932 5.96912 23.9969C0.876273 33.9029 7.27094 44 7.27094 44L42.4379 44Z"
+                            fill="currentColor"></path>
+                    </svg>
+                </div>
+                <h2 class="text-xl font-bold tracking-tighter uppercase">SWIRL</h2>
+            </div>
+            <nav class="hidden items-center gap-10 md:flex">
+                <a class="text-sm font-medium tracking-wide text-white/70 transition-colors hover:text-primary"
+                    href="#">Platform</a>
+                <a class="text-sm font-medium tracking-wide text-white/70 transition-colors hover:text-primary"
+                    href="#">Solutions</a>
+                <a class="text-sm font-medium tracking-wide text-white/70 transition-colors hover:text-primary"
+                    href="#">Intelligence</a>
+                <a class="text-sm font-medium tracking-wide text-white/70 transition-colors hover:text-primary"
+                    href="#">Network</a>
+            </nav>
+            <div class="flex items-center gap-6">
+                <button
+                    class="hidden text-sm font-bold uppercase tracking-widest text-white hover:text-primary lg:block">Log
+                    In</button>
+                <button
+                    class="flex h-10 items-center justify-center rounded-sm bg-primary px-6 text-xs font-black uppercase tracking-widest text-white transition-transform hover:scale-105">
+                    Request Access
+                </button>
+            </div>
+        </header>
+        <main class="flex flex-1 flex-col">
+            <!-- Hero Section -->
+            <section class="relative flex min-h-[90vh] flex-col items-center justify-center px-6 text-center lg:px-20">
+                <div class="absolute inset-0 z-0 flex items-center justify-center overflow-hidden pointer-events-none">
+                    <div class="relative size-[600px] opacity-20 lg:size-[800px]">
+                        <!-- 3D Geometric Engine Representation -->
+                        <div class="absolute inset-0 border border-primary/40 rotate-45 animate-[pulse_4s_infinite]">
+                        </div>
+                        <div class="absolute inset-10 border border-primary/30 -rotate-12"></div>
+                        <div class="absolute inset-20 border border-primary/20 rotate-90"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="size-px bg-primary hero-glow shadow-[0_0_100px_50px_rgba(236,19,73,0.3)]"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative z-10 flex max-w-4xl flex-col items-center gap-8">
+                    <div
+                        class="inline-flex items-center gap-2 border border-primary/30 bg-primary/5 px-3 py-1 rounded-full">
+                        <span class="relative flex h-2 w-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                        </span>
+                        <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">System Status:
+                            Neural Core Online</span>
+                    </div>
+                    <h1 class="text-6xl font-black leading-[1.1] tracking-tighter lg:text-8xl">
+                        SWIRL: The Intelligence <br /> <span class="text-primary">Behind Luxury</span>
+                    </h1>
+                    <p class="max-w-2xl text-lg font-light leading-relaxed text-white/60 lg:text-xl">
+                        The first touchless commerce engine for the high-end market.
+                        Autonomous trend synthesis and real-time execution.
+                    </p>
+                    <div class="flex flex-col gap-4 sm:flex-row">
+                        <button
+                            class="flex h-14 min-w-[200px] items-center justify-center bg-primary px-8 text-sm font-bold uppercase tracking-widest text-white">
+                            Initialize Engine
+                        </button>
+                        <button
+                            class="flex h-14 min-w-[200px] items-center justify-center border border-white/20 px-8 text-sm font-bold uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-obsidian">
+                            View Documentation
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <!-- Capabilities Section -->
+            <section class="border-y border-primary/10 bg-burgundy-dark/30 py-24 px-6 lg:px-40">
+                <div class="mb-16 flex flex-col gap-4">
+                    <h2 class="text-xs font-black uppercase tracking-[0.4em] text-primary">Operational Matrix</h2>
+                    <h3 class="text-4xl font-bold tracking-tighter">Core Capabilities</h3>
+                    <p class="max-w-xl text-white/50">Powering the future of touchless commerce with AI precision and
+                        neural processing.</p>
+                </div>
+                <div class="grid grid-cols-1 gap-px bg-primary/10 sm:grid-cols-2 lg:grid-cols-4">
+                    <!-- Capability 1 -->
+                    <div
+                        class="group relative flex flex-col gap-6 bg-obsidian p-10 transition-colors hover:bg-burgundy-dark">
+                        <div
+                            class="flex h-12 w-12 items-center justify-center rounded-sm border border-primary/30 text-primary transition-all group-hover:scale-110 group-hover:bg-primary group-hover:text-white">
+                            <span class="material-symbols-outlined">psychology</span>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <h4 class="text-xl font-bold uppercase tracking-tight">Understand</h4>
+                            <p class="text-sm font-light leading-relaxed text-white/50">Semantic consumer mapping and
+                                deep intent recognition via neural core processing.</p>
+                        </div>
+                    </div>
+                    <!-- Capability 2 -->
+                    <div
+                        class="group relative flex flex-col gap-6 bg-obsidian p-10 transition-colors hover:bg-burgundy-dark">
+                        <div
+                            class="flex h-12 w-12 items-center justify-center rounded-sm border border-primary/30 text-primary transition-all group-hover:scale-110 group-hover:bg-primary group-hover:text-white">
+                            <span class="material-symbols-outlined">record_voice_over</span>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <h4 class="text-xl font-bold uppercase tracking-tight">Speak</h4>
+                            <p class="text-sm font-light leading-relaxed text-white/50">Generative luxury voice and
+                                brand-aligned communication at global scale.</p>
+                        </div>
+                    </div>
+                    <!-- Capability 3 -->
+                    <div
+                        class="group relative flex flex-col gap-6 bg-obsidian p-10 transition-colors hover:bg-burgundy-dark">
+                        <div
+                            class="flex h-12 w-12 items-center justify-center rounded-sm border border-primary/30 text-primary transition-all group-hover:scale-110 group-hover:bg-primary group-hover:text-white">
+                            <span class="material-symbols-outlined">auto_graph</span>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <h4 class="text-xl font-bold uppercase tracking-tight">Learn</h4>
+                            <p class="text-sm font-light leading-relaxed text-white/50">Autonomous trend synthesis and
+                                market intelligence cycles reduced to seconds.</p>
+                        </div>
+                    </div>
+                    <!-- Capability 4 -->
+                    <div
+                        class="group relative flex flex-col gap-6 bg-obsidian p-10 transition-colors hover:bg-burgundy-dark">
+                        <div
+                            class="flex h-12 w-12 items-center justify-center rounded-sm border border-primary/30 text-primary transition-all group-hover:scale-110 group-hover:bg-primary group-hover:text-white">
+                            <span class="material-symbols-outlined">bolt</span>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <h4 class="text-xl font-bold uppercase tracking-tight">Act</h4>
+                            <p class="text-sm font-light leading-relaxed text-white/50">Real-time supply chain and
+                                commerce execution with sub-ms latency responses.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Dashboard Section -->
+            <section class="py-24 px-6 lg:px-40">
+                <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12">
+                    <div class="flex flex-col gap-4">
+                        <h2 class="text-xs font-black uppercase tracking-[0.4em] text-primary">Live Telemetry</h2>
+                        <h3 class="text-4xl font-bold tracking-tighter">Performance Dashboard</h3>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="text-right">
+                            <p class="text-[10px] uppercase text-white/40">Global Load</p>
+                            <p class="text-lg font-mono font-bold text-primary">42.8 TFLOPS</p>
+                        </div>
+                        <div class="h-10 w-px bg-primary/20"></div>
+                        <div class="text-right">
+                            <p class="text-[10px] uppercase text-white/40">Active Nodes</p>
+                            <p class="text-lg font-mono font-bold text-primary">8,102</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+                    <div class="lg:col-span-2 glass-card p-8">
+                        <div class="flex items-center justify-between mb-8">
+                            <h5 class="text-sm font-bold uppercase tracking-widest text-white/70">Neural Inference Speed
+                            </h5>
+                            <span class="text-xs font-mono text-primary">STATUS: OPTIMAL</span>
+                        </div>
+                        <div class="h-64 w-full">
+                            <svg class="h-full w-full" preserveaspectratio="none" viewbox="0 0 1000 200">
+                                <defs>
+                                    <lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+                                        <stop offset="0%" stop-color="#ec1349" stop-opacity="0.2"></stop>
+                                        <stop offset="100%" stop-color="#ec1349" stop-opacity="0"></stop>
+                                    </lineargradient>
+                                </defs>
+                                <path
+                                    d="M0,150 Q50,140 100,160 T200,120 T300,140 T400,100 T500,110 T600,60 T700,80 T800,40 T900,50 T1000,20 V200 H0 Z"
+                                    fill="url(#chartGradient)"></path>
+                                <path
+                                    d="M0,150 Q50,140 100,160 T200,120 T300,140 T400,100 T500,110 T600,60 T700,80 T800,40 T900,50 T1000,20"
+                                    fill="none" stroke="#ec1349" stroke-width="2"></path>
+                                <circle class="animate-pulse" cx="600" cy="60" fill="#ec1349" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div class="mt-4 flex justify-between text-[10px] font-mono text-white/30">
+                            <span>00:00:01</span>
+                            <span>00:00:15</span>
+                            <span>00:00:30</span>
+                            <span>00:00:45</span>
+                            <span>LIVE</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-6">
+                        <div class="flex-1 glass-card p-6 flex flex-col justify-between">
+                            <div class="flex flex-col gap-1">
+                                <p class="text-[10px] uppercase tracking-widest text-white/40">Decision Accuracy</p>
+                                <p class="text-4xl font-black text-white">99.98%</p>
+                            </div>
+                            <div class="h-1 w-full bg-white/5">
+                                <div class="h-full bg-primary" style="width: 99.98%"></div>
+                            </div>
+                        </div>
+                        <div class="flex-1 glass-card p-6 flex flex-col justify-between border-l-4 border-l-primary">
+                            <div class="flex flex-col gap-1">
+                                <p class="text-[10px] uppercase tracking-widest text-white/40">Processing Latency</p>
+                                <p class="text-4xl font-black text-white">12<span
+                                        class="text-xl font-light text-white/40">ms</span></p>
+                            </div>
+                            <p class="text-[10px] font-mono text-primary">SYSTEM CLOCK SYNCHRONIZED</p>
+                        </div>
+                        <div class="flex-1 glass-card p-6 flex flex-col justify-between">
+                            <div class="flex flex-col gap-1">
+                                <p class="text-[10px] uppercase tracking-widest text-white/40">Conversion Delta</p>
+                                <p class="text-4xl font-black text-white">+31.2%</p>
+                            </div>
+                            <p class="text-[10px] font-mono text-green-500">↑ PEAK PERFORMANCE REACHED</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Use Case Cards -->
+            <section class="py-24 px-6 lg:px-40 bg-obsidian">
+                <div class="grid grid-cols-1 gap-12 lg:grid-cols-2">
+                    <div class="relative overflow-hidden group">
+                        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                            data-alt="Modern high-end luxury sports car in a dark futuristic showroom"
+                            style="background-image: linear-gradient(to bottom, transparent, #0a0a0a), url('https://lh3.googleusercontent.com/aida-public/AB6AXuCoItRXDLAIhqlSchn6_wCZvW5KPY330B0PqsTmONjpikZmCSWtnx0eQK-91sSeyAtk0puUrL2K0enO7iQevhAxVE9UgFX8PQQiABtvxYuVupky1EX5lq1FVPZlXk-xGqjNLbzDzD60HF_wQMZTZgM4zc0yr7GbQHdOiyyn9MPOnjsH2F14wVNxr33lCv516j8-zgqYlGDX-pOl82mP4Sh4xCDTEWRMPICfgEIHHoBiNRMrWO38Vj1_Sm5ry_Jrp2AJoPtPpq-Wuw')">
+                        </div>
+                        <div class="relative z-10 flex h-[500px] flex-col justify-end p-12">
+                            <h2 class="text-xs font-black uppercase tracking-[0.4em] text-primary mb-2">Sector 01</h2>
+                            <h3 class="text-4xl font-bold tracking-tighter mb-4">Automotive</h3>
+                            <p class="text-white/60 mb-8 max-w-sm">Touchless digital showrooms and autonomous
+                                configuration engines for the next generation of mobility.</p>
+                            <button
+                                class="w-fit border border-primary px-6 py-2 text-xs font-bold uppercase tracking-widest text-primary hover:bg-primary hover:text-white transition-colors">
+                                Case Study
+                            </button>
+                        </div>
+                    </div>
+                    <div class="relative overflow-hidden group">
+                        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                            data-alt="Elegant luxury retail boutique interior with high-end accessories"
+                            style="background-image: linear-gradient(to bottom, transparent, #0a0a0a), url('https://lh3.googleusercontent.com/aida-public/AB6AXuBMcEp1m-7hQEFLuHuxP32w_WJ72xKX-KlWTl9ZUrG4DguGyeoogidIvQL9G-9Q2tvSdJDCnKakeSC9d5K4GEtPpWrMmxKcKCs-CQShHvMnbWv3u8Ezhb7YNTzK98qqgO958S8Md5nb3m3uRB1dIwyqJTBnnCZEQJTBM-8RysQz47q8PhFKSD9Vom3UjdF5gYLMnA9RRmF8iD732UUS_-oHdnmNn4_KpgMcypIltxEud8hoJ3GksrMzMVDgos_1omTMWH0Zsxya7A')">
+                        </div>
+                        <div class="relative z-10 flex h-[500px] flex-col justify-end p-12">
+                            <h2 class="text-xs font-black uppercase tracking-[0.4em] text-primary mb-2">Sector 02</h2>
+                            <h3 class="text-4xl font-bold tracking-tighter mb-4">Luxury Retail</h3>
+                            <p class="text-white/60 mb-8 max-w-sm">Personalized AI concierge systems that understand
+                                prestige, heritage, and individual exclusivity.</p>
+                            <button
+                                class="w-fit border border-primary px-6 py-2 text-xs font-bold uppercase tracking-widest text-primary hover:bg-primary hover:text-white transition-colors">
+                                Case Study
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Trust / Logo Cloud -->
+            <section class="border-t border-primary/10 py-16 px-6 lg:px-40">
+                <p class="text-center text-[10px] font-bold uppercase tracking-[0.5em] text-white/30 mb-12">Trusted by
+                    Global Entities</p>
+                <div class="flex flex-wrap items-center justify-center gap-12 grayscale opacity-50 contrast-125">
+                    <span class="text-2xl font-black italic tracking-tighter">VANTAGE</span>
+                    <span class="text-2xl font-light tracking-[0.3em]">LUMINARE</span>
+                    <span class="text-2xl font-bold tracking-tight">OVAL</span>
+                    <span class="text-2xl font-black uppercase">Prism</span>
+                    <span class="text-2xl font-medium tracking-widest">AETHER</span>
+                </div>
+            </section>
+            <!-- CTA Section -->
+            <section class="relative py-32 px-6 lg:px-40 text-center overflow-hidden">
+                <div class="absolute inset-0 bg-primary/5 -z-10"></div>
+                <div
+                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[600px] bg-primary/10 rounded-full blur-[120px] -z-10">
+                </div>
+                <div class="max-w-3xl mx-auto flex flex-col items-center gap-8">
+                    <h2 class="text-5xl font-black tracking-tighter lg:text-6xl uppercase">Secure Your Node</h2>
+                    <p class="text-lg text-white/60">Limited capacity for Q3 deployment. Connect with our engineering
+                        team to integrate the SWIRL engine into your stack.</p>
+                    <div
+                        class="w-full max-w-md flex flex-col sm:flex-row gap-2 border border-primary/20 bg-obsidian p-2">
+                        <input
+                            class="flex-1 bg-transparent border-none text-xs font-mono tracking-widest focus:ring-0 placeholder:text-white/20"
+                            placeholder="ENTER ACCESS CODE OR EMAIL" type="email" />
+                        <button
+                            class="bg-primary px-8 py-4 text-xs font-black uppercase tracking-widest text-white">Initialize</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Footer -->
+        <footer class="border-t border-primary/10 bg-background-dark px-6 py-12 lg:px-20">
+            <div class="grid grid-cols-1 gap-12 lg:grid-cols-4">
+                <div class="flex flex-col gap-6">
+                    <div class="flex items-center gap-3">
+                        <div class="text-primary size-6">
+                            <svg fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M42.4379 44C42.4379 44 36.0744 33.9038 41.1692 24C46.8624 12.9336 42.2078 4 42.2078 4L7.01134 4C7.01134 4 11.6577 12.932 5.96912 23.9969C0.876273 33.9029 7.27094 44 7.27094 44L42.4379 44Z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h2 class="text-lg font-bold tracking-tighter uppercase">SWIRL</h2>
+                    </div>
+                    <p class="text-xs leading-relaxed text-white/40">The future of touchless commerce. <br />Built for
+                        the elite market.</p>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <h5 class="text-[10px] font-black uppercase tracking-[0.3em] text-white/60">Core</h5>
+                    <nav class="flex flex-col gap-2 text-sm text-white/40">
+                        <a class="hover:text-primary" href="#">Engine</a>
+                        <a class="hover:text-primary" href="#">API Reference</a>
+                        <a class="hover:text-primary" href="#">Global Nodes</a>
+                    </nav>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <h5 class="text-[10px] font-black uppercase tracking-[0.3em] text-white/60">Legal</h5>
+                    <nav class="flex flex-col gap-2 text-sm text-white/40">
+                        <a class="hover:text-primary" href="#">Privacy Protocol</a>
+                        <a class="hover:text-primary" href="#">Service Level</a>
+                        <a class="hover:text-primary" href="#">Security</a>
+                    </nav>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <h5 class="text-[10px] font-black uppercase tracking-[0.3em] text-white/60">System</h5>
+                    <div class="flex items-center gap-2">
+                        <div class="size-2 bg-green-500 rounded-full shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
+                        <span class="text-[10px] font-mono text-white/60 uppercase">All Nodes Operational</span>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 sm:flex-row">
+                <p class="text-[10px] font-mono text-white/20">© 2024 SWIRL AI COMMERCE ENGINE. NO RIGHTS RESERVED.</p>
+                <div class="flex gap-6 text-white/40">
+                    <span class="material-symbols-outlined text-sm hover:text-primary cursor-pointer">language</span>
+                    <span class="material-symbols-outlined text-sm hover:text-primary cursor-pointer">terminal</span>
+                    <span class="material-symbols-outlined text-sm hover:text-primary cursor-pointer">hub</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
